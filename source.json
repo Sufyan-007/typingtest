@@ -1,0 +1,26 @@
+{
+  "A": {
+    "type": "OBJECT",
+    "properties": {
+      "obj": {
+        "type": "FUNCTION",
+        "returnType": {
+          "selection": "anyOf",
+          "types": [
+            {
+              "$ref": "x",
+              "refType": "TEMPLATE"
+            }
+          ]
+        },
+        "parameters": [],
+        "isAsync": false,
+        "name": "obj",
+        "id": "obj"
+      }
+    },
+    "id": "A",
+    "schemaType": "modals",
+    "name": "A"
+  }
+}

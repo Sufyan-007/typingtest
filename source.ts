@@ -1,6 +1,3 @@
-interface XA{
-    setA: (a:number)=>void;
-    setb:(a:number)=>void;
-    x:number;
-    y:number
+interface A extends String {
+  obj: <x extends A>(a: x) => x;
 }
