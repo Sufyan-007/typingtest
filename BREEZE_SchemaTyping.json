@@ -1,0 +1,614 @@
+{
+  "BreezeSchema.BaseType": {
+    "type": "OBJECT",
+    "properties": {
+      "type": {
+        "selection": "anyOf",
+        "types": [
+          {
+            "type": "LITERAL",
+            "value": {
+              "type": "STRING",
+              "value": "STRING"
+            }
+          },
+          {
+            "type": "LITERAL",
+            "value": {
+              "type": "STRING",
+              "value": "NUMERIC"
+            }
+          },
+          {
+            "type": "LITERAL",
+            "value": {
+              "type": "STRING",
+              "value": "LABEL"
+            }
+          },
+          {
+            "type": "LITERAL",
+            "value": {
+              "type": "STRING",
+              "value": "SYMBOL"
+            }
+          },
+          {
+            "type": "LITERAL",
+            "value": {
+              "type": "STRING",
+              "value": "BOOLEAN"
+            }
+          },
+          {
+            "type": "LITERAL",
+            "value": {
+              "type": "STRING",
+              "value": "OBJECT"
+            }
+          },
+          {
+            "type": "LITERAL",
+            "value": {
+              "type": "STRING",
+              "value": "ARRAY"
+            }
+          },
+          {
+            "type": "LITERAL",
+            "value": {
+              "type": "STRING",
+              "value": "LITERAL"
+            }
+          },
+          {
+            "type": "LITERAL",
+            "value": {
+              "type": "STRING",
+              "value": "FUNCTION"
+            }
+          },
+          {
+            "type": "LITERAL",
+            "value": {
+              "type": "STRING",
+              "value": "VOID"
+            }
+          },
+          {
+            "type": "LITERAL",
+            "value": {
+              "type": "STRING",
+              "value": "UNDEFINED"
+            }
+          },
+          {
+            "type": "LITERAL",
+            "value": {
+              "type": "STRING",
+              "value": "ANY"
+            }
+          },
+          {
+            "type": "LITERAL",
+            "value": {
+              "type": "STRING",
+              "value": "UNKNOWN_TYPE"
+            }
+          },
+          {
+            "type": "LITERAL",
+            "value": {
+              "type": "STRING",
+              "value": "NULL"
+            }
+          }
+        ],
+        "name": "type",
+        "id": "type"
+      }
+    },
+    "id": "BreezeSchema.BaseType",
+    "required": [
+      "type"
+    ],
+    "templateInputs": [],
+    "schemaType": "modals",
+    "name": "BaseType",
+    "extends": []
+  },
+  "BreezeSchema.LITERAL": {
+    "type": "OBJECT",
+    "properties": {
+      "type": {
+        "type": "LITERAL",
+        "value": {
+          "type": "STRING",
+          "value": "LITERAL"
+        },
+        "name": "type",
+        "id": "type"
+      },
+      "value": {
+        "type": "ANY",
+        "name": "value",
+        "id": "value"
+      }
+    },
+    "id": "BreezeSchema.LITERAL",
+    "required": [
+      "type",
+      "value"
+    ],
+    "templateInputs": [],
+    "schemaType": "modals",
+    "name": "LITERAL",
+    "extends": [
+      {
+        "$ref": "BaseType",
+        "templateInputs": []
+      }
+    ]
+  },
+  "BreezeSchema.Label": {
+    "type": "OBJECT",
+    "properties": {
+      "type": {
+        "type": "LITERAL",
+        "value": {
+          "type": "STRING",
+          "value": "LABEL"
+        },
+        "name": "type",
+        "id": "type"
+      },
+      "value": {
+        "selection": "anyOf",
+        "types": [
+          {
+            "type": "STRING"
+          },
+          {
+            "type": "NUMERIC"
+          },
+          {
+            "type": "UNKNOWN_TYPE",
+            "raw": "false"
+          },
+          {
+            "type": "UNKNOWN_TYPE",
+            "raw": "true"
+          },
+          {
+            "type": "UNKNOWN_TYPE",
+            "raw": "symbol"
+          }
+        ],
+        "name": "value",
+        "id": "value"
+      }
+    },
+    "id": "BreezeSchema.Label",
+    "required": [
+      "type",
+      "value"
+    ],
+    "templateInputs": [],
+    "schemaType": "modals",
+    "name": "Label",
+    "extends": [
+      {
+        "$ref": "BaseType",
+        "templateInputs": []
+      }
+    ]
+  },
+  "BreezeSchema.FunctionType": {
+    "type": "OBJECT",
+    "properties": {
+      "type": {
+        "type": "LITERAL",
+        "value": {
+          "type": "STRING",
+          "value": "FUNCTION"
+        },
+        "name": "type",
+        "id": "type"
+      },
+      "returnType": {
+        "$ref": "Type",
+        "templateInputs": [],
+        "name": "returnType",
+        "id": "returnType"
+      },
+      "isAsync": {
+        "type": "BOOLEAN",
+        "name": "isAsync",
+        "id": "isAsync"
+      },
+      "templateInputs": {
+        "type": "ARRAY",
+        "templateInput": {
+          "type": "OBJECT",
+          "properties": {
+            "name": {
+              "type": "STRING",
+              "name": "name",
+              "id": "name"
+            },
+            "extends": {
+              "type": "ARRAY",
+              "templateInput": {
+                "selection": "anyOf",
+                "types": [
+                  {
+                    "$ref": "BaseType",
+                    "templateInputs": []
+                  },
+                  {
+                    "$ref": "Type",
+                    "templateInputs": []
+                  },
+                  {
+                    "$ref": "ReferencedType",
+                    "templateInputs": []
+                  }
+                ]
+              },
+              "name": "extends",
+              "id": "extends"
+            }
+          },
+          "id": null,
+          "required": [
+            "name"
+          ]
+        },
+        "name": "templateInputs",
+        "id": "templateInputs"
+      },
+      "parameters": {
+        "type": "ARRAY",
+        "templateInput": {
+          "$ref": "Type",
+          "templateInputs": []
+        },
+        "name": "parameters",
+        "id": "parameters"
+      }
+    },
+    "id": "BreezeSchema.FunctionType",
+    "required": [
+      "type",
+      "returnType",
+      "isAsync",
+      "parameters"
+    ],
+    "templateInputs": [],
+    "schemaType": "modals",
+    "name": "FunctionType",
+    "extends": [
+      {
+        "$ref": "BaseType",
+        "templateInputs": []
+      }
+    ]
+  },
+  "BreezeSchema.ObjectType": {
+    "type": "OBJECT",
+    "properties": {
+      "type": {
+        "type": "LITERAL",
+        "value": {
+          "type": "STRING",
+          "value": "OBJECT"
+        },
+        "name": "type",
+        "id": "type"
+      },
+      "id": {
+        "type": "STRING",
+        "name": "id",
+        "id": "id"
+      },
+      "properties": {
+        "type": "OBJECT",
+        "properties": {},
+        "id": "properties",
+        "required": [],
+        "name": "properties"
+      },
+      "templateInputs": {
+        "type": "ARRAY",
+        "templateInput": {
+          "type": "OBJECT",
+          "properties": {
+            "name": {
+              "type": "STRING",
+              "name": "name",
+              "id": "name"
+            },
+            "extends": {
+              "selection": "anyOf",
+              "types": [
+                {
+                  "$ref": "BaseType",
+                  "templateInputs": []
+                },
+                {
+                  "$ref": "Type",
+                  "templateInputs": []
+                },
+                {
+                  "$ref": "ReferencedType",
+                  "templateInputs": []
+                }
+              ],
+              "name": "extends",
+              "id": "extends"
+            }
+          },
+          "id": null,
+          "required": [
+            "name"
+          ]
+        },
+        "name": "templateInputs",
+        "id": "templateInputs"
+      },
+      "required": {
+        "type": "ARRAY",
+        "templateInput": {
+          "type": "STRING"
+        },
+        "name": "required",
+        "id": "required"
+      },
+      "additionalProperties": {
+        "$ref": "Type",
+        "templateInputs": [],
+        "name": "additionalProperties",
+        "id": "additionalProperties"
+      }
+    },
+    "id": "BreezeSchema.ObjectType",
+    "required": [
+      "type",
+      "properties"
+    ],
+    "templateInputs": [],
+    "schemaType": "modals",
+    "name": "ObjectType",
+    "extends": [
+      {
+        "$ref": "BaseType",
+        "templateInputs": []
+      }
+    ]
+  },
+  "BreezeSchema.StoredSchema": {
+    "type": "OBJECT",
+    "properties": {
+      "name": {
+        "type": "STRING",
+        "name": "name",
+        "id": "name"
+      },
+      "description": {
+        "type": "STRING",
+        "name": "description",
+        "id": "description"
+      },
+      "exampleValue": {
+        "type": "ANY",
+        "name": "exampleValue",
+        "id": "exampleValue"
+      }
+    },
+    "id": "BreezeSchema.StoredSchema",
+    "required": [
+      "name"
+    ],
+    "templateInputs": [],
+    "schemaType": "modals",
+    "name": "StoredSchema",
+    "extends": []
+  },
+  "BreezeSchema.SchemaModals": {
+    "type": "OBJECT",
+    "properties": {
+      "extends": {
+        "type": "ARRAY",
+        "templateInput": {
+          "$ref": "ReferencedType",
+          "templateInputs": []
+        },
+        "name": "extends",
+        "id": "extends"
+      },
+      "schemaType": {
+        "type": "LITERAL",
+        "value": {
+          "type": "STRING",
+          "value": "modals"
+        },
+        "name": "schemaType",
+        "id": "schemaType"
+      }
+    },
+    "id": "BreezeSchema.SchemaModals",
+    "required": [
+      "schemaType"
+    ],
+    "templateInputs": [],
+    "schemaType": "modals",
+    "name": "SchemaModals",
+    "extends": [
+      {
+        "$ref": "ObjectType",
+        "templateInputs": []
+      },
+      {
+        "$ref": "StoredSchema",
+        "templateInputs": []
+      }
+    ]
+  },
+  "BreezeSchema.CombinedType": {
+    "type": "OBJECT",
+    "properties": {
+      "schemaType": {
+        "type": "LITERAL",
+        "value": {
+          "type": "STRING",
+          "value": "combined"
+        },
+        "name": "schemaType",
+        "id": "schemaType"
+      }
+    },
+    "id": "BreezeSchema.CombinedType",
+    "required": [
+      "schemaType"
+    ],
+    "templateInputs": [],
+    "schemaType": "modals",
+    "name": "CombinedType",
+    "extends": [
+      {
+        "$ref": "Type",
+        "templateInputs": []
+      },
+      {
+        "$ref": "StoredSchema",
+        "templateInputs": []
+      }
+    ]
+  },
+  "BreezeSchema.ReferencedType": {
+    "type": "OBJECT",
+    "properties": {
+      "$ref": {
+        "type": "STRING",
+        "name": "$ref",
+        "id": "$ref"
+      },
+      "templateInputs": {
+        "type": "ARRAY",
+        "templateInput": {
+          "selection": "anyOf",
+          "types": [
+            {
+              "$ref": "BaseType",
+              "templateInputs": []
+            },
+            {
+              "$ref": "Type",
+              "templateInputs": []
+            },
+            {
+              "$ref": "ReferencedType",
+              "templateInputs": []
+            }
+          ]
+        },
+        "name": "templateInputs",
+        "id": "templateInputs"
+      }
+    },
+    "id": "BreezeSchema.ReferencedType",
+    "required": [
+      "$ref"
+    ],
+    "templateInputs": [],
+    "schemaType": "modals",
+    "name": "ReferencedType",
+    "extends": []
+  },
+  "BreezeSchema.Type": {
+    "type": "OBJECT",
+    "properties": {
+      "selection": {
+        "selection": "anyOf",
+        "types": [
+          {
+            "type": "LITERAL",
+            "value": {
+              "type": "STRING",
+              "value": "anyOf"
+            }
+          },
+          {
+            "type": "LITERAL",
+            "value": {
+              "type": "STRING",
+              "value": "oneOf"
+            }
+          },
+          {
+            "type": "LITERAL",
+            "value": {
+              "type": "STRING",
+              "value": "allOf"
+            }
+          }
+        ],
+        "name": "selection",
+        "id": "selection"
+      },
+      "types": {
+        "type": "ARRAY",
+        "templateInput": {
+          "selection": "anyOf",
+          "types": [
+            {
+              "$ref": "BaseType",
+              "templateInputs": []
+            },
+            {
+              "$ref": "Type",
+              "templateInputs": []
+            },
+            {
+              "$ref": "ReferencedType",
+              "templateInputs": []
+            }
+          ]
+        },
+        "name": "types",
+        "id": "types"
+      }
+    },
+    "id": "BreezeSchema.Type",
+    "required": [
+      "selection",
+      "types"
+    ],
+    "templateInputs": [],
+    "schemaType": "modals",
+    "name": "Type",
+    "extends": []
+  },
+  "BreezeSchema.Test": {
+    "type": "OBJECT",
+    "properties": {
+      "hello": {
+        "type": "LITERAL",
+        "value": {
+          "type": "STRING",
+          "value": "World"
+        },
+        "name": "hello",
+        "id": "hello"
+      }
+    },
+    "id": "BreezeSchema.Test",
+    "required": [
+      "hello"
+    ],
+    "templateInputs": [],
+    "schemaType": "modals",
+    "name": "Test",
+    "extends": []
+  }
+}

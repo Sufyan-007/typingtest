@@ -1,22 +1,108 @@
-import { Node, Project, Type } from "ts-morph";
+import {
+  InterfaceDeclaration,
+  ModuleDeclaration,
+  Node,
+  Project,
+  StatementedNode,
+  Type,
+} from "ts-morph";
 import fs from "fs";
 import { BreezeSchema } from "./BREEZE_SchemaTyping";
+import path from "path";
+import { exit } from "process";
 
 const project = new Project();
 const conf: Record<string, BreezeSchema.SchemaModals> = {};
-const source = project.addSourceFileAtPath("source.ts");
+const sourceFilePath = process.argv[2];
+let outputFile = process.argv[3];
 
-source.getInterfaces().forEach((i) => {
+if (!sourceFilePath) {
+  console.error("❌ Error: Please provide a TypeScript file as an argument.");
+  console.error("Usage: npx tsx file.ts source.ts");
+  process.exit(1);
+}
+const source = project.addSourceFileAtPath(sourceFilePath);
+if (!outputFile) {
+  const inputDir = path.dirname(sourceFilePath);
+  const fileName = path.basename(sourceFilePath, path.extname(sourceFilePath)); // Get the file name without extension
+  outputFile = path.join(inputDir, `${fileName}.json`);
+}
+
+function processInterface(i: InterfaceDeclaration, idPrefix: string = "") {
   const name = i.getName();
-  const properties = processObjectProperties(i.getType());
+  const id = idPrefix + name;
+  const properties = processObject(i.getType());
+  const templateInputs: BreezeSchema.SchemaModals["templateInputs"] = [];
+  i.getTypeParameters().forEach((template) => {
+    const symbol = template.getSymbol();
+    const name = symbol?.getName() || "Unknown";
+    const constraints = template.getType().getConstraint()
+    templateInputs.push({
+      extends: constraints?processType(constraints):undefined,
+      name,
+    });
+  });
+  const extending: BreezeSchema.SchemaModals["extends"] = [];
 
-  conf[name] = { ...properties, schemaType: "modals", id: name, name };
-});
+  i.getExtends().forEach((e) => {
+    // extends will always be refrenced type
+    const parent = processType(e.getType()) as BreezeSchema.ReferencedType;
+    extending.push(parent);
+  });
+
+  if (conf[id]) {
+    console.warn(`Merging duplicate schema for: ${id}`);
+
+    // Merge properties
+    conf[id].properties = {
+      ...conf[id].properties,
+      ...properties.properties, // Merge properties from new interface
+    };
+
+    // Merge extends (avoid duplicates)
+    conf[id].extends = [
+      ...(conf[id].extends || []),
+      ...extending.filter(
+        (ext) =>
+          !conf[id].extends?.some((existing) => existing.$ref === ext.$ref)
+      ),
+    ];
+
+    return;
+  }
+
+  conf[id] = {
+    ...properties,
+    templateInputs,
+    schemaType: "modals",
+    id: id,
+    name,
+    extends: extending,
+  };
+}
+
+function processModule(
+  module: ModuleDeclaration,
+  idPrefix: `${string}.` | undefined = undefined
+) {
+  let prefix: `${string}.`;
+  if (idPrefix) {
+    prefix = `${idPrefix}${module.getName()}.`;
+  } else {
+    prefix = `${module.getName()}.`;
+  }
+  module.getInterfaces().forEach((i) => processInterface(i, prefix));
+  module.getModules().forEach((m) => processModule(m, prefix));
+}
+
+source.getModules().forEach((m) => processModule(m));
+source.getInterfaces().forEach((i) => processInterface(i));
 
 function processType(
   type: Type | undefined
 ): BreezeSchema.BaseType | BreezeSchema.Type | BreezeSchema.ReferencedType {
-  // console.log(type.getSymbol().getName())
+  console.log("t", type?.getText(),type?.isUnion(),type?.getSymbol()?.getName());
+
   if (!type) {
     return {
       type: "ANY",
@@ -34,17 +120,19 @@ function processType(
   else if (type.isObject() && !type.isArray()) {
     const name = type.getSymbol()?.getName();
     if (name && name != "__type") {
-      console.log(name);
       // const typeName = symbol.getName();
       const typeArguments = type.getTypeArguments(); // Get the template inputs
-
       return {
         $ref: name,
-        templateInputs: typeArguments.map((t) => processType(t)), // Process the template inputs
+        templateInputs: typeArguments.map((t) => {
+        
+          const type = processType(t); // Process the template inputs
+          return type;
+        }),
       };
     }
 
-    return processObjectProperties(type);
+    return processObject(type);
   } else if (type.isTypeParameter()) {
     return {
       $ref: type.getText(),
@@ -136,24 +224,30 @@ function getBaseValueType(value: unknown) {
   throw new Error(`Unsupported literal type: ${typeof value}`);
 }
 
-function processObjectProperties(obj: Type): BreezeSchema.ObjectType {
+function processObject(obj: Type): BreezeSchema.ObjectType {
   const properties: BreezeSchema.ObjectType["properties"] = {};
   const symbol = obj.getSymbol();
   const declaration = symbol?.getDeclarations()[0];
+  const required: string[] = [];
   if (declaration && Node.isInterfaceDeclaration(declaration)) {
-    [...declaration.getProperties(), ...declaration.getMethods()].forEach(
-      (prop) => {
-        const propType = prop.getType();
-        const property = processType(propType);
-        const name = prop.getName();
-        properties[name] = { ...property, name, id: name };
+    [...declaration.getProperties(),...declaration.getMethods()].forEach((prop) => {
+      const propType = prop.getType();
+      const property = processType(propType);
+      const name = prop.getName();
+      if (prop.getSymbol()?.isOptional() === false) {
+        required.push(name);
       }
-    );
+
+      properties[name] = { ...property, name, id: name };
+    });
   } else {
     obj.getProperties().forEach((prop) => {
       const propType = prop.getTypeAtLocation(prop.getDeclarations()[0]);
       const property = processType(propType);
       const name = prop.getName();
+      if (!prop.isOptional()) {
+        required.push(name);
+      }
       properties[name] = { ...property, name, id: name };
     });
   }
@@ -161,6 +255,7 @@ function processObjectProperties(obj: Type): BreezeSchema.ObjectType {
     type: "OBJECT",
     properties: properties,
     id: undefined,
+    required: required,
   };
 }
 
@@ -178,9 +273,15 @@ function processFunction(func: Type): BreezeSchema.FunctionType {
     };
   }
 
-  // console.log(signature.getReturnType().isTypeParameter())
+  const templates: BreezeSchema.FunctionType["templateInputs"] = [];
 
   const parameters: BreezeSchema.FunctionType["parameters"] = [];
+
+  signature.getTypeParameters().forEach((template) => {
+    const symbol = template.getSymbol();
+    const name = symbol?.getName() || "Unknown";
+    templates.push({ extends: [processType(template.getConstraint())], name });
+  });
 
   return {
     type: "FUNCTION",
@@ -189,9 +290,7 @@ function processFunction(func: Type): BreezeSchema.FunctionType {
     isAsync: false,
   };
 }
-
-console.log(conf);
 fs.writeFileSync(
-  "source.json",
+  outputFile,
   JSON.stringify(conf, (k, s) => (s === undefined ? null : s), 2)
 );

@@ -33,6 +33,10 @@ export namespace BreezeSchema {
     type: "FUNCTION";
     returnType: Type;
     isAsync: boolean;
+    templateInputs?: Array<{
+      name: string;
+      extends?: Array<Type|BaseType|ReferencedType>;
+    }>;
     parameters: Array<Type>;
   }
 
@@ -50,9 +54,8 @@ export namespace BreezeSchema {
     properties: Record<Properties["id"], Properties>;
     templateInputs?: Array<{
       name: string;
-      extends?: Type;
+      extends?: Type|BaseType|ReferencedType;
     }>;
-    extends?: ReferencedType[];
     required?: Properties["id"][];
     additionalProperties?: Type;
   }
@@ -64,6 +67,7 @@ export namespace BreezeSchema {
   }
 
   export interface SchemaModals extends ObjectType, StoredSchema {
+    extends?: Array<ReferencedType>;
     schemaType: "modals";
   }
 
