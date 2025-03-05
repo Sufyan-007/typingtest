@@ -1,16 +1,28 @@
 {
   "A": {
     "type": "OBJECT",
-    "properties": {},
+    "properties": {
+      "a": {
+        "selection": "anyOf",
+        "types": [
+          {
+            "type": "STRING"
+          },
+          {
+            "type": "NUMERIC"
+          }
+        ],
+        "name": "a",
+        "id": "a"
+      }
+    },
     "id": "A",
-    "required": [],
+    "required": [
+      "a"
+    ],
     "templateInputs": [],
     "schemaType": "modals",
     "name": "A",
-    "extends": [
-      {
-        "type": "ANY"
-      }
-    ]
+    "extends": []
   }
 }

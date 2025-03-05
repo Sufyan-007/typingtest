@@ -35,7 +35,7 @@ export namespace BreezeSchema {
     isAsync: boolean;
     templateInputs?: Array<{
       name: string;
-      extends?: Array<Type|BaseType|ReferencedType>;
+      extends?: Type|BaseType|ReferencedType;
     }>;
     parameters: Array<Type>;
   }
