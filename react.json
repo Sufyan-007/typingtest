@@ -9,27 +9,26 @@
         "id": "current"
       }
     },
-    "id": "React.RefObject",
     "required": [
       "current"
     ],
     "templateInputs": [
       {
-        "extends": null,
         "name": "T"
       }
     ],
     "schemaType": "modals",
+    "id": "React.RefObject",
     "name": "RefObject",
     "extends": []
   },
   "React.DO_NOT_USE_OR_YOU_WILL_BE_FIRED_CALLBACK_REF_RETURN_VALUES": {
     "type": "OBJECT",
     "properties": {},
-    "id": "React.DO_NOT_USE_OR_YOU_WILL_BE_FIRED_CALLBACK_REF_RETURN_VALUES",
     "required": [],
     "templateInputs": [],
     "schemaType": "modals",
+    "id": "React.DO_NOT_USE_OR_YOU_WILL_BE_FIRED_CALLBACK_REF_RETURN_VALUES",
     "name": "DO_NOT_USE_OR_YOU_WILL_BE_FIRED_CALLBACK_REF_RETURN_VALUES",
     "extends": []
   },
@@ -42,10 +41,10 @@
         "id": "key"
       }
     },
-    "id": "React.Attributes",
     "required": [],
     "templateInputs": [],
     "schemaType": "modals",
+    "id": "React.Attributes",
     "name": "Attributes",
     "extends": []
   },
@@ -58,15 +57,14 @@
         "id": "ref"
       }
     },
-    "id": "React.RefAttributes",
     "required": [],
     "templateInputs": [
       {
-        "extends": null,
         "name": "T"
       }
     ],
     "schemaType": "modals",
+    "id": "React.RefAttributes",
     "name": "RefAttributes",
     "extends": [
       {
@@ -78,15 +76,14 @@
   "React.ClassAttributes": {
     "type": "OBJECT",
     "properties": {},
-    "id": "React.ClassAttributes",
     "required": [],
     "templateInputs": [
       {
-        "extends": null,
         "name": "T"
       }
     ],
     "schemaType": "modals",
+    "id": "React.ClassAttributes",
     "name": "ClassAttributes",
     "extends": [
       {
@@ -121,7 +118,6 @@
         "id": "key"
       }
     },
-    "id": "React.ReactElement",
     "required": [
       "type",
       "props",
@@ -129,7 +125,6 @@
     ],
     "templateInputs": [
       {
-        "extends": null,
         "name": "P"
       },
       {
@@ -155,7 +150,6 @@
             {
               "type": "OBJECT",
               "properties": {},
-              "id": null,
               "required": []
             }
           ]
@@ -164,13 +158,13 @@
       }
     ],
     "schemaType": "modals",
+    "id": "React.ReactElement",
     "name": "ReactElement",
     "extends": []
   },
   "React.ReactComponentElement": {
     "type": "OBJECT",
     "properties": {},
-    "id": "React.ReactComponentElement",
     "required": [],
     "templateInputs": [
       {
@@ -207,7 +201,6 @@
             {
               "type": "OBJECT",
               "properties": {},
-              "id": null,
               "required": []
             },
             {
@@ -1447,11 +1440,11 @@
         "name": "T"
       },
       {
-        "extends": null,
         "name": "P"
       }
     ],
     "schemaType": "modals",
+    "id": "React.ReactComponentElement",
     "name": "ReactComponentElement",
     "extends": [
       {
@@ -1479,15 +1472,14 @@
         "id": "ref"
       }
     },
-    "id": "React.FunctionComponentElement",
     "required": [],
     "templateInputs": [
       {
-        "extends": null,
         "name": "P"
       }
     ],
     "schemaType": "modals",
+    "id": "React.FunctionComponentElement",
     "name": "FunctionComponentElement",
     "extends": [
       {
@@ -1523,11 +1515,9 @@
         "id": "ref"
       }
     },
-    "id": "React.ComponentElement",
     "required": [],
     "templateInputs": [
       {
-        "extends": null,
         "name": "P"
       },
       {
@@ -1550,6 +1540,7 @@
       }
     ],
     "schemaType": "modals",
+    "id": "React.ComponentElement",
     "name": "ComponentElement",
     "extends": [
       {
@@ -1584,7 +1575,6 @@
         "id": "ref"
       }
     },
-    "id": "React.DOMElement",
     "required": [
       "ref"
     ],
@@ -1624,6 +1614,7 @@
       }
     ],
     "schemaType": "modals",
+    "id": "React.DOMElement",
     "name": "DOMElement",
     "extends": [
       {
@@ -1643,7 +1634,6 @@
   "React.ReactHTMLElement": {
     "type": "OBJECT",
     "properties": {},
-    "id": "React.ReactHTMLElement",
     "required": [],
     "templateInputs": [
       {
@@ -1655,6 +1645,7 @@
       }
     ],
     "schemaType": "modals",
+    "id": "React.ReactHTMLElement",
     "name": "ReactHTMLElement",
     "extends": [
       {
@@ -2514,7 +2505,6 @@
         "id": "type"
       }
     },
-    "id": "React.DetailedReactHTMLElement",
     "required": [
       "type"
     ],
@@ -2540,6 +2530,7 @@
       }
     ],
     "schemaType": "modals",
+    "id": "React.DetailedReactHTMLElement",
     "name": "DetailedReactHTMLElement",
     "extends": [
       {
@@ -2953,12 +2944,12 @@
         "id": "type"
       }
     },
-    "id": "React.ReactSVGElement",
     "required": [
       "type"
     ],
     "templateInputs": [],
     "schemaType": "modals",
+    "id": "React.ReactSVGElement",
     "name": "ReactSVGElement",
     "extends": [
       {
@@ -2990,12 +2981,12 @@
         "id": "children"
       }
     },
-    "id": "React.ReactPortal",
     "required": [
       "children"
     ],
     "templateInputs": [],
     "schemaType": "modals",
+    "id": "React.ReactPortal",
     "name": "ReactPortal",
     "extends": [
       {
@@ -3026,7 +3017,6 @@
               {
                 "type": "OBJECT",
                 "properties": {},
-                "id": null,
                 "required": []
               }
             ]
@@ -3038,7 +3028,6 @@
   "React.HTMLFactory": {
     "type": "OBJECT",
     "properties": {},
-    "id": "React.HTMLFactory",
     "required": [],
     "templateInputs": [
       {
@@ -3050,6 +3039,7 @@
       }
     ],
     "schemaType": "modals",
+    "id": "React.HTMLFactory",
     "name": "HTMLFactory",
     "extends": [
       {
@@ -3085,7 +3075,6 @@
   "React.DetailedHTMLFactory": {
     "type": "OBJECT",
     "properties": {},
-    "id": "React.DetailedHTMLFactory",
     "required": [],
     "templateInputs": [
       {
@@ -3109,6 +3098,7 @@
       }
     ],
     "schemaType": "modals",
+    "id": "React.DetailedHTMLFactory",
     "name": "DetailedHTMLFactory",
     "extends": [
       {
@@ -3139,10 +3129,10 @@
   "React.SVGFactory": {
     "type": "OBJECT",
     "properties": {},
-    "id": "React.SVGFactory",
     "required": [],
     "templateInputs": [],
     "schemaType": "modals",
+    "id": "React.SVGFactory",
     "name": "SVGFactory",
     "extends": [
       {
@@ -3178,10 +3168,10 @@
   "React.ReactNodeArray": {
     "type": "OBJECT",
     "properties": {},
-    "id": "React.ReactNodeArray",
     "required": [],
     "templateInputs": [],
     "schemaType": "modals",
+    "id": "React.ReactNodeArray",
     "name": "ReactNodeArray",
     "extends": [
       {
@@ -3197,10 +3187,10 @@
   "React.DO_NOT_USE_OR_YOU_WILL_BE_FIRED_EXPERIMENTAL_REACT_NODES": {
     "type": "OBJECT",
     "properties": {},
-    "id": "React.DO_NOT_USE_OR_YOU_WILL_BE_FIRED_EXPERIMENTAL_REACT_NODES",
     "required": [],
     "templateInputs": [],
     "schemaType": "modals",
+    "id": "React.DO_NOT_USE_OR_YOU_WILL_BE_FIRED_EXPERIMENTAL_REACT_NODES",
     "name": "DO_NOT_USE_OR_YOU_WILL_BE_FIRED_EXPERIMENTAL_REACT_NODES",
     "extends": []
   },
@@ -3219,17 +3209,16 @@
         "id": "children"
       }
     },
-    "id": "React.ProviderProps",
     "required": [
       "value"
     ],
     "templateInputs": [
       {
-        "extends": null,
         "name": "T"
       }
     ],
     "schemaType": "modals",
+    "id": "React.ProviderProps",
     "name": "ProviderProps",
     "extends": []
   },
@@ -3252,17 +3241,16 @@
         "id": "children"
       }
     },
-    "id": "React.ConsumerProps",
     "required": [
       "children"
     ],
     "templateInputs": [
       {
-        "extends": null,
         "name": "T"
       }
     ],
     "schemaType": "modals",
+    "id": "React.ConsumerProps",
     "name": "ConsumerProps",
     "extends": []
   },
@@ -3276,17 +3264,16 @@
         "id": "$$typeof"
       }
     },
-    "id": "React.ExoticComponent",
     "required": [
       "$$typeof"
     ],
     "templateInputs": [
       {
-        "extends": null,
         "name": "P"
       }
     ],
     "schemaType": "modals",
+    "id": "React.ExoticComponent",
     "name": "ExoticComponent",
     "extends": []
   },
@@ -3299,15 +3286,14 @@
         "id": "displayName"
       }
     },
-    "id": "React.NamedExoticComponent",
     "required": [],
     "templateInputs": [
       {
-        "extends": null,
         "name": "P"
       }
     ],
     "schemaType": "modals",
+    "id": "React.NamedExoticComponent",
     "name": "NamedExoticComponent",
     "extends": [
       {
@@ -3331,20 +3317,19 @@
       "propTypes": {
         "type": "OBJECT",
         "properties": {},
-        "id": "propTypes",
         "required": [],
-        "name": "propTypes"
+        "name": "propTypes",
+        "id": "propTypes"
       }
     },
-    "id": "React.ProviderExoticComponent",
     "required": [],
     "templateInputs": [
       {
-        "extends": null,
         "name": "P"
       }
     ],
     "schemaType": "modals",
+    "id": "React.ProviderExoticComponent",
     "name": "ProviderExoticComponent",
     "extends": [
       {
@@ -3401,18 +3386,17 @@
         "id": "displayName"
       }
     },
-    "id": "React.Context",
     "required": [
       "Provider",
       "Consumer"
     ],
     "templateInputs": [
       {
-        "extends": null,
         "name": "T"
       }
     ],
     "schemaType": "modals",
+    "id": "React.Context",
     "name": "Context",
     "extends": []
   },
@@ -3435,10 +3419,10 @@
         "id": "name"
       }
     },
-    "id": "React.SuspenseProps",
     "required": [],
     "templateInputs": [],
     "schemaType": "modals",
+    "id": "React.SuspenseProps",
     "name": "SuspenseProps",
     "extends": []
   },
@@ -3471,36 +3455,33 @@
         "id": "onRender"
       }
     },
-    "id": "React.ProfilerProps",
     "required": [
       "id",
       "onRender"
     ],
     "templateInputs": [],
     "schemaType": "modals",
+    "id": "React.ProfilerProps",
     "name": "ProfilerProps",
     "extends": []
   },
   "React.Component": {
     "type": "OBJECT",
     "properties": {},
-    "id": "React.Component",
     "required": [],
     "templateInputs": [
       {
-        "extends": null,
         "name": "P"
       },
       {
-        "extends": null,
         "name": "S"
       },
       {
-        "extends": null,
         "name": "SS"
       }
     ],
     "schemaType": "modals",
+    "id": "React.Component",
     "name": "Component",
     "extends": [
       {
@@ -3572,22 +3553,20 @@
         "id": "getInitialState"
       }
     },
-    "id": "React.ClassicComponent",
     "required": [
       "replaceState",
       "isMounted"
     ],
     "templateInputs": [
       {
-        "extends": null,
         "name": "P"
       },
       {
-        "extends": null,
         "name": "S"
       }
     ],
     "schemaType": "modals",
+    "id": "React.ClassicComponent",
     "name": "ClassicComponent",
     "extends": [
       {
@@ -3628,17 +3607,16 @@
         "id": "getChildContext"
       }
     },
-    "id": "React.ChildContextProvider",
     "required": [
       "getChildContext"
     ],
     "templateInputs": [
       {
-        "extends": null,
         "name": "CC"
       }
     ],
     "schemaType": "modals",
+    "id": "React.ChildContextProvider",
     "name": "ChildContextProvider",
     "extends": []
   },
@@ -3648,23 +3626,23 @@
       "propTypes": {
         "type": "OBJECT",
         "properties": {},
-        "id": "propTypes",
         "required": [],
-        "name": "propTypes"
+        "name": "propTypes",
+        "id": "propTypes"
       },
       "contextTypes": {
         "type": "OBJECT",
         "properties": {},
-        "id": "contextTypes",
         "required": [],
-        "name": "contextTypes"
+        "name": "contextTypes",
+        "id": "contextTypes"
       },
       "defaultProps": {
         "type": "OBJECT",
         "properties": {},
-        "id": "defaultProps",
         "required": [],
-        "name": "defaultProps"
+        "name": "defaultProps",
+        "id": "defaultProps"
       },
       "displayName": {
         "type": "STRING",
@@ -3672,15 +3650,14 @@
         "id": "displayName"
       }
     },
-    "id": "React.FunctionComponent",
     "required": [],
     "templateInputs": [
       {
-        "extends": null,
         "name": "P"
       }
     ],
     "schemaType": "modals",
+    "id": "React.FunctionComponent",
     "name": "FunctionComponent",
     "extends": []
   },
@@ -3690,23 +3667,23 @@
       "propTypes": {
         "type": "OBJECT",
         "properties": {},
-        "id": "propTypes",
         "required": [],
-        "name": "propTypes"
+        "name": "propTypes",
+        "id": "propTypes"
       },
       "contextTypes": {
         "type": "OBJECT",
         "properties": {},
-        "id": "contextTypes",
         "required": [],
-        "name": "contextTypes"
+        "name": "contextTypes",
+        "id": "contextTypes"
       },
       "defaultProps": {
         "type": "OBJECT",
         "properties": {},
-        "id": "defaultProps",
         "required": [],
-        "name": "defaultProps"
+        "name": "defaultProps",
+        "id": "defaultProps"
       },
       "displayName": {
         "type": "STRING",
@@ -3714,15 +3691,14 @@
         "id": "displayName"
       }
     },
-    "id": "React.VoidFunctionComponent",
     "required": [],
     "templateInputs": [
       {
-        "extends": null,
         "name": "P"
       }
     ],
     "schemaType": "modals",
+    "id": "React.VoidFunctionComponent",
     "name": "VoidFunctionComponent",
     "extends": []
   },
@@ -3745,19 +3721,17 @@
         "id": "propTypes"
       }
     },
-    "id": "React.ForwardRefRenderFunction",
     "required": [],
     "templateInputs": [
       {
-        "extends": null,
         "name": "T"
       },
       {
-        "extends": null,
         "name": "P"
       }
     ],
     "schemaType": "modals",
+    "id": "React.ForwardRefRenderFunction",
     "name": "ForwardRefRenderFunction",
     "extends": []
   },
@@ -3767,9 +3741,9 @@
       "propTypes": {
         "type": "OBJECT",
         "properties": {},
-        "id": "propTypes",
         "required": [],
-        "name": "propTypes"
+        "name": "propTypes",
+        "id": "propTypes"
       },
       "contextType": {
         "$ref": "Context",
@@ -3784,23 +3758,23 @@
       "contextTypes": {
         "type": "OBJECT",
         "properties": {},
-        "id": "contextTypes",
         "required": [],
-        "name": "contextTypes"
+        "name": "contextTypes",
+        "id": "contextTypes"
       },
       "childContextTypes": {
         "type": "OBJECT",
         "properties": {},
-        "id": "childContextTypes",
         "required": [],
-        "name": "childContextTypes"
+        "name": "childContextTypes",
+        "id": "childContextTypes"
       },
       "defaultProps": {
         "type": "OBJECT",
         "properties": {},
-        "id": "defaultProps",
         "required": [],
-        "name": "defaultProps"
+        "name": "defaultProps",
+        "id": "defaultProps"
       },
       "displayName": {
         "type": "STRING",
@@ -3808,19 +3782,17 @@
         "id": "displayName"
       }
     },
-    "id": "React.ComponentClass",
     "required": [],
     "templateInputs": [
       {
-        "extends": null,
         "name": "P"
       },
       {
-        "extends": null,
         "name": "S"
       }
     ],
     "schemaType": "modals",
+    "id": "React.ComponentClass",
     "name": "ComponentClass",
     "extends": [
       {
@@ -3858,15 +3830,14 @@
         "id": "getDefaultProps"
       }
     },
-    "id": "React.ClassicComponentClass",
     "required": [],
     "templateInputs": [
       {
-        "extends": null,
         "name": "P"
       }
     ],
     "schemaType": "modals",
+    "id": "React.ClassicComponentClass",
     "name": "ClassicComponentClass",
     "extends": [
       {
@@ -3947,23 +3918,20 @@
         "id": "componentDidCatch"
       }
     },
-    "id": "React.ComponentLifecycle",
     "required": [],
     "templateInputs": [
       {
-        "extends": null,
         "name": "P"
       },
       {
-        "extends": null,
         "name": "S"
       },
       {
-        "extends": null,
         "name": "SS"
       }
     ],
     "schemaType": "modals",
+    "id": "React.ComponentLifecycle",
     "name": "ComponentLifecycle",
     "extends": [
       {
@@ -4009,7 +3977,6 @@
             {
               "type": "OBJECT",
               "properties": {},
-              "id": null,
               "required": []
             }
           ]
@@ -4027,7 +3994,6 @@
             {
               "type": "OBJECT",
               "properties": {},
-              "id": null,
               "required": []
             }
           ]
@@ -4038,19 +4004,17 @@
         "id": "getDerivedStateFromError"
       }
     },
-    "id": "React.StaticLifecycle",
     "required": [],
     "templateInputs": [
       {
-        "extends": null,
         "name": "P"
       },
       {
-        "extends": null,
         "name": "S"
       }
     ],
     "schemaType": "modals",
+    "id": "React.StaticLifecycle",
     "name": "StaticLifecycle",
     "extends": []
   },
@@ -4089,23 +4053,20 @@
         "id": "componentDidUpdate"
       }
     },
-    "id": "React.NewLifecycle",
     "required": [],
     "templateInputs": [
       {
-        "extends": null,
         "name": "P"
       },
       {
-        "extends": null,
         "name": "S"
       },
       {
-        "extends": null,
         "name": "SS"
       }
     ],
     "schemaType": "modals",
+    "id": "React.NewLifecycle",
     "name": "NewLifecycle",
     "extends": []
   },
@@ -4203,19 +4164,17 @@
         "id": "UNSAFE_componentWillUpdate"
       }
     },
-    "id": "React.DeprecatedLifecycle",
     "required": [],
     "templateInputs": [
       {
-        "extends": null,
         "name": "P"
       },
       {
-        "extends": null,
         "name": "S"
       }
     ],
     "schemaType": "modals",
+    "id": "React.DeprecatedLifecycle",
     "name": "DeprecatedLifecycle",
     "extends": []
   },
@@ -4245,9 +4204,9 @@
       "statics": {
         "type": "OBJECT",
         "properties": {},
-        "id": "statics",
         "required": [],
-        "name": "statics"
+        "name": "statics",
+        "id": "statics"
       },
       "displayName": {
         "type": "STRING",
@@ -4257,23 +4216,23 @@
       "propTypes": {
         "type": "OBJECT",
         "properties": {},
-        "id": "propTypes",
         "required": [],
-        "name": "propTypes"
+        "name": "propTypes",
+        "id": "propTypes"
       },
       "contextTypes": {
         "type": "OBJECT",
         "properties": {},
-        "id": "contextTypes",
         "required": [],
-        "name": "contextTypes"
+        "name": "contextTypes",
+        "id": "contextTypes"
       },
       "childContextTypes": {
         "type": "OBJECT",
         "properties": {},
-        "id": "childContextTypes",
         "required": [],
-        "name": "childContextTypes"
+        "name": "childContextTypes",
+        "id": "childContextTypes"
       },
       "getDefaultProps": {
         "type": "FUNCTION",
@@ -4308,19 +4267,17 @@
         "id": "getInitialState"
       }
     },
-    "id": "React.Mixin",
     "required": [],
     "templateInputs": [
       {
-        "extends": null,
         "name": "P"
       },
       {
-        "extends": null,
         "name": "S"
       }
     ],
     "schemaType": "modals",
+    "id": "React.Mixin",
     "name": "Mixin",
     "extends": [
       {
@@ -4360,21 +4317,19 @@
         "id": "render"
       }
     },
-    "id": "React.ComponentSpec",
     "required": [
       "render"
     ],
     "templateInputs": [
       {
-        "extends": null,
         "name": "P"
       },
       {
-        "extends": null,
         "name": "S"
       }
     ],
     "schemaType": "modals",
+    "id": "React.ComponentSpec",
     "name": "ComponentSpec",
     "extends": [
       {
@@ -4398,27 +4353,26 @@
       "defaultProps": {
         "type": "OBJECT",
         "properties": {},
-        "id": "defaultProps",
         "required": [],
-        "name": "defaultProps"
+        "name": "defaultProps",
+        "id": "defaultProps"
       },
       "propTypes": {
         "type": "OBJECT",
         "properties": {},
-        "id": "propTypes",
         "required": [],
-        "name": "propTypes"
+        "name": "propTypes",
+        "id": "propTypes"
       }
     },
-    "id": "React.ForwardRefExoticComponent",
     "required": [],
     "templateInputs": [
       {
-        "extends": null,
         "name": "P"
       }
     ],
     "schemaType": "modals",
+    "id": "React.ForwardRefExoticComponent",
     "name": "ForwardRefExoticComponent",
     "extends": [
       {
@@ -4446,7 +4400,6 @@
         "id": "_result"
       }
     },
-    "id": "React.LazyExoticComponent",
     "required": [
       "_result"
     ],
@@ -4459,6 +4412,7 @@
       }
     ],
     "schemaType": "modals",
+    "id": "React.LazyExoticComponent",
     "name": "LazyExoticComponent",
     "extends": [
       {
@@ -4486,27 +4440,26 @@
         "id": "current"
       }
     },
-    "id": "React.MutableRefObject",
     "required": [
       "current"
     ],
     "templateInputs": [
       {
-        "extends": null,
         "name": "T"
       }
     ],
     "schemaType": "modals",
+    "id": "React.MutableRefObject",
     "name": "MutableRefObject",
     "extends": []
   },
   "React.TransitionStartFunction": {
     "type": "OBJECT",
     "properties": {},
-    "id": "React.TransitionStartFunction",
     "required": [],
     "templateInputs": [],
     "schemaType": "modals",
+    "id": "React.TransitionStartFunction",
     "name": "TransitionStartFunction",
     "extends": []
   },
@@ -4642,7 +4595,6 @@
         "id": "persist"
       }
     },
-    "id": "React.BaseSyntheticEvent",
     "required": [
       "nativeEvent",
       "currentTarget",
@@ -4662,38 +4614,34 @@
     ],
     "templateInputs": [
       {
-        "extends": null,
         "name": "E"
       },
       {
-        "extends": null,
         "name": "C"
       },
       {
-        "extends": null,
         "name": "T"
       }
     ],
     "schemaType": "modals",
+    "id": "React.BaseSyntheticEvent",
     "name": "BaseSyntheticEvent",
     "extends": []
   },
   "React.SyntheticEvent": {
     "type": "OBJECT",
     "properties": {},
-    "id": "React.SyntheticEvent",
     "required": [],
     "templateInputs": [
       {
-        "extends": null,
         "name": "T"
       },
       {
-        "extends": null,
         "name": "E"
       }
     ],
     "schemaType": "modals",
+    "id": "React.SyntheticEvent",
     "name": "SyntheticEvent",
     "extends": [
       {
@@ -4734,17 +4682,16 @@
         "id": "clipboardData"
       }
     },
-    "id": "React.ClipboardEvent",
     "required": [
       "clipboardData"
     ],
     "templateInputs": [
       {
-        "extends": null,
         "name": "T"
       }
     ],
     "schemaType": "modals",
+    "id": "React.ClipboardEvent",
     "name": "ClipboardEvent",
     "extends": [
       {
@@ -4771,17 +4718,16 @@
         "id": "data"
       }
     },
-    "id": "React.CompositionEvent",
     "required": [
       "data"
     ],
     "templateInputs": [
       {
-        "extends": null,
         "name": "T"
       }
     ],
     "schemaType": "modals",
+    "id": "React.CompositionEvent",
     "name": "CompositionEvent",
     "extends": [
       {
@@ -4809,17 +4755,16 @@
         "id": "dataTransfer"
       }
     },
-    "id": "React.DragEvent",
     "required": [
       "dataTransfer"
     ],
     "templateInputs": [
       {
-        "extends": null,
         "name": "T"
       }
     ],
     "schemaType": "modals",
+    "id": "React.DragEvent",
     "name": "DragEvent",
     "extends": [
       {
@@ -4914,7 +4859,6 @@
         "id": "isPrimary"
       }
     },
-    "id": "React.PointerEvent",
     "required": [
       "pointerId",
       "pressure",
@@ -4929,11 +4873,11 @@
     ],
     "templateInputs": [
       {
-        "extends": null,
         "name": "T"
       }
     ],
     "schemaType": "modals",
+    "id": "React.PointerEvent",
     "name": "PointerEvent",
     "extends": [
       {
@@ -4985,22 +4929,20 @@
         "id": "target"
       }
     },
-    "id": "React.FocusEvent",
     "required": [
       "relatedTarget",
       "target"
     ],
     "templateInputs": [
       {
-        "extends": null,
         "name": "Target"
       },
       {
-        "extends": null,
         "name": "RelatedTarget"
       }
     ],
     "schemaType": "modals",
+    "id": "React.FocusEvent",
     "name": "FocusEvent",
     "extends": [
       {
@@ -5021,15 +4963,14 @@
   "React.FormEvent": {
     "type": "OBJECT",
     "properties": {},
-    "id": "React.FormEvent",
     "required": [],
     "templateInputs": [
       {
-        "extends": null,
         "name": "T"
       }
     ],
     "schemaType": "modals",
+    "id": "React.FormEvent",
     "name": "FormEvent",
     "extends": [
       {
@@ -5066,17 +5007,16 @@
         "id": "target"
       }
     },
-    "id": "React.InvalidEvent",
     "required": [
       "target"
     ],
     "templateInputs": [
       {
-        "extends": null,
         "name": "T"
       }
     ],
     "schemaType": "modals",
+    "id": "React.InvalidEvent",
     "name": "InvalidEvent",
     "extends": [
       {
@@ -5113,17 +5053,16 @@
         "id": "target"
       }
     },
-    "id": "React.ChangeEvent",
     "required": [
       "target"
     ],
     "templateInputs": [
       {
-        "extends": null,
         "name": "T"
       }
     ],
     "schemaType": "modals",
+    "id": "React.ChangeEvent",
     "name": "ChangeEvent",
     "extends": [
       {
@@ -5220,7 +5159,6 @@
         "id": "getModifierState"
       }
     },
-    "id": "React.KeyboardEvent",
     "required": [
       "altKey",
       "charCode",
@@ -5238,11 +5176,11 @@
     ],
     "templateInputs": [
       {
-        "extends": null,
         "name": "T"
       }
     ],
     "schemaType": "modals",
+    "id": "React.KeyboardEvent",
     "name": "KeyboardEvent",
     "extends": [
       {
@@ -5355,7 +5293,6 @@
         "id": "getModifierState"
       }
     },
-    "id": "React.MouseEvent",
     "required": [
       "altKey",
       "button",
@@ -5376,15 +5313,14 @@
     ],
     "templateInputs": [
       {
-        "extends": null,
         "name": "T"
       },
       {
-        "extends": null,
         "name": "E"
       }
     ],
     "schemaType": "modals",
+    "id": "React.MouseEvent",
     "name": "MouseEvent",
     "extends": [
       {
@@ -5459,7 +5395,6 @@
         "id": "getModifierState"
       }
     },
-    "id": "React.TouchEvent",
     "required": [
       "altKey",
       "changedTouches",
@@ -5472,11 +5407,11 @@
     ],
     "templateInputs": [
       {
-        "extends": null,
         "name": "T"
       }
     ],
     "schemaType": "modals",
+    "id": "React.TouchEvent",
     "name": "TouchEvent",
     "extends": [
       {
@@ -5509,22 +5444,20 @@
         "id": "view"
       }
     },
-    "id": "React.UIEvent",
     "required": [
       "detail",
       "view"
     ],
     "templateInputs": [
       {
-        "extends": null,
         "name": "T"
       },
       {
-        "extends": null,
         "name": "E"
       }
     ],
     "schemaType": "modals",
+    "id": "React.UIEvent",
     "name": "UIEvent",
     "extends": [
       {
@@ -5566,7 +5499,6 @@
         "id": "deltaZ"
       }
     },
-    "id": "React.WheelEvent",
     "required": [
       "deltaMode",
       "deltaX",
@@ -5575,11 +5507,11 @@
     ],
     "templateInputs": [
       {
-        "extends": null,
         "name": "T"
       }
     ],
     "schemaType": "modals",
+    "id": "React.WheelEvent",
     "name": "WheelEvent",
     "extends": [
       {
@@ -5616,7 +5548,6 @@
         "id": "pseudoElement"
       }
     },
-    "id": "React.AnimationEvent",
     "required": [
       "animationName",
       "elapsedTime",
@@ -5624,11 +5555,11 @@
     ],
     "templateInputs": [
       {
-        "extends": null,
         "name": "T"
       }
     ],
     "schemaType": "modals",
+    "id": "React.AnimationEvent",
     "name": "AnimationEvent",
     "extends": [
       {
@@ -5665,7 +5596,6 @@
         "id": "pseudoElement"
       }
     },
-    "id": "React.TransitionEvent",
     "required": [
       "elapsedTime",
       "propertyName",
@@ -5673,11 +5603,11 @@
     ],
     "templateInputs": [
       {
-        "extends": null,
         "name": "T"
       }
     ],
     "schemaType": "modals",
+    "id": "React.TransitionEvent",
     "name": "TransitionEvent",
     "extends": [
       {
@@ -5698,15 +5628,14 @@
   "React.HTMLProps": {
     "type": "OBJECT",
     "properties": {},
-    "id": "React.HTMLProps",
     "required": [],
     "templateInputs": [
       {
-        "extends": null,
         "name": "T"
       }
     ],
     "schemaType": "modals",
+    "id": "React.HTMLProps",
     "name": "HTMLProps",
     "extends": [
       {
@@ -5732,15 +5661,14 @@
   "React.SVGProps": {
     "type": "OBJECT",
     "properties": {},
-    "id": "React.SVGProps",
     "required": [],
     "templateInputs": [
       {
-        "extends": null,
         "name": "T"
       }
     ],
     "schemaType": "modals",
+    "id": "React.SVGProps",
     "name": "SVGProps",
     "extends": [
       {
@@ -5766,15 +5694,14 @@
   "React.SVGLineElementAttributes": {
     "type": "OBJECT",
     "properties": {},
-    "id": "React.SVGLineElementAttributes",
     "required": [],
     "templateInputs": [
       {
-        "extends": null,
         "name": "T"
       }
     ],
     "schemaType": "modals",
+    "id": "React.SVGLineElementAttributes",
     "name": "SVGLineElementAttributes",
     "extends": [
       {
@@ -5791,15 +5718,14 @@
   "React.SVGTextElementAttributes": {
     "type": "OBJECT",
     "properties": {},
-    "id": "React.SVGTextElementAttributes",
     "required": [],
     "templateInputs": [
       {
-        "extends": null,
         "name": "T"
       }
     ],
     "schemaType": "modals",
+    "id": "React.SVGTextElementAttributes",
     "name": "SVGTextElementAttributes",
     "extends": [
       {
@@ -5839,11 +5765,11 @@
             "id": "__html"
           }
         },
-        "id": "dangerouslySetInnerHTML",
         "required": [
           "__html"
         ],
-        "name": "dangerouslySetInnerHTML"
+        "name": "dangerouslySetInnerHTML",
+        "id": "dangerouslySetInnerHTML"
       },
       "onCopy": {
         "type": "FUNCTION",
@@ -8246,25 +8172,24 @@
         "id": "onTransitionEndCapture"
       }
     },
-    "id": "React.DOMAttributes",
     "required": [],
     "templateInputs": [
       {
-        "extends": null,
         "name": "T"
       }
     ],
     "schemaType": "modals",
+    "id": "React.DOMAttributes",
     "name": "DOMAttributes",
     "extends": []
   },
   "React.CSSProperties": {
     "type": "OBJECT",
     "properties": {},
-    "id": "React.CSSProperties",
     "required": [],
     "templateInputs": [],
     "schemaType": "modals",
+    "id": "React.CSSProperties",
     "name": "CSSProperties",
     "extends": [
       {
@@ -8290,7 +8215,6 @@
               {
                 "type": "OBJECT",
                 "properties": {},
-                "id": null,
                 "required": []
               }
             ]
@@ -9001,10 +8925,10 @@
         "id": "\"aria-valuetext\""
       }
     },
-    "id": "React.AriaAttributes",
     "required": [],
     "templateInputs": [],
     "schemaType": "modals",
+    "id": "React.AriaAttributes",
     "name": "AriaAttributes",
     "extends": []
   },
@@ -9064,7 +8988,6 @@
               {
                 "type": "OBJECT",
                 "properties": {},
-                "id": null,
                 "required": []
               }
             ]
@@ -9511,15 +9434,14 @@
         "id": "is"
       }
     },
-    "id": "React.HTMLAttributes",
     "required": [],
     "templateInputs": [
       {
-        "extends": null,
         "name": "T"
       }
     ],
     "schemaType": "modals",
+    "id": "React.HTMLAttributes",
     "name": "HTMLAttributes",
     "extends": [
       {
@@ -9540,10 +9462,10 @@
   "React.DO_NOT_USE_OR_YOU_WILL_BE_FIRED_EXPERIMENTAL_FORM_ACTIONS": {
     "type": "OBJECT",
     "properties": {},
-    "id": "React.DO_NOT_USE_OR_YOU_WILL_BE_FIRED_EXPERIMENTAL_FORM_ACTIONS",
     "required": [],
     "templateInputs": [],
     "schemaType": "modals",
+    "id": "React.DO_NOT_USE_OR_YOU_WILL_BE_FIRED_EXPERIMENTAL_FORM_ACTIONS",
     "name": "DO_NOT_USE_OR_YOU_WILL_BE_FIRED_EXPERIMENTAL_FORM_ACTIONS",
     "extends": []
   },
@@ -10165,15 +10087,14 @@
         "id": "wrap"
       }
     },
-    "id": "React.AllHTMLAttributes",
     "required": [],
     "templateInputs": [
       {
-        "extends": null,
         "name": "T"
       }
     ],
     "schemaType": "modals",
+    "id": "React.AllHTMLAttributes",
     "name": "AllHTMLAttributes",
     "extends": [
       {
@@ -10231,15 +10152,14 @@
         "id": "referrerPolicy"
       }
     },
-    "id": "React.AnchorHTMLAttributes",
     "required": [],
     "templateInputs": [
       {
-        "extends": null,
         "name": "T"
       }
     ],
     "schemaType": "modals",
+    "id": "React.AnchorHTMLAttributes",
     "name": "AnchorHTMLAttributes",
     "extends": [
       {
@@ -10256,15 +10176,14 @@
   "React.AudioHTMLAttributes": {
     "type": "OBJECT",
     "properties": {},
-    "id": "React.AudioHTMLAttributes",
     "required": [],
     "templateInputs": [
       {
-        "extends": null,
         "name": "T"
       }
     ],
     "schemaType": "modals",
+    "id": "React.AudioHTMLAttributes",
     "name": "AudioHTMLAttributes",
     "extends": [
       {
@@ -10327,15 +10246,14 @@
         "id": "target"
       }
     },
-    "id": "React.AreaHTMLAttributes",
     "required": [],
     "templateInputs": [
       {
-        "extends": null,
         "name": "T"
       }
     ],
     "schemaType": "modals",
+    "id": "React.AreaHTMLAttributes",
     "name": "AreaHTMLAttributes",
     "extends": [
       {
@@ -10363,15 +10281,14 @@
         "id": "target"
       }
     },
-    "id": "React.BaseHTMLAttributes",
     "required": [],
     "templateInputs": [
       {
-        "extends": null,
         "name": "T"
       }
     ],
     "schemaType": "modals",
+    "id": "React.BaseHTMLAttributes",
     "name": "BaseHTMLAttributes",
     "extends": [
       {
@@ -10394,15 +10311,14 @@
         "id": "cite"
       }
     },
-    "id": "React.BlockquoteHTMLAttributes",
     "required": [],
     "templateInputs": [
       {
-        "extends": null,
         "name": "T"
       }
     ],
     "schemaType": "modals",
+    "id": "React.BlockquoteHTMLAttributes",
     "name": "BlockquoteHTMLAttributes",
     "extends": [
       {
@@ -10509,15 +10425,14 @@
         "id": "value"
       }
     },
-    "id": "React.ButtonHTMLAttributes",
     "required": [],
     "templateInputs": [
       {
-        "extends": null,
         "name": "T"
       }
     ],
     "schemaType": "modals",
+    "id": "React.ButtonHTMLAttributes",
     "name": "ButtonHTMLAttributes",
     "extends": [
       {
@@ -10561,15 +10476,14 @@
         "id": "width"
       }
     },
-    "id": "React.CanvasHTMLAttributes",
     "required": [],
     "templateInputs": [
       {
-        "extends": null,
         "name": "T"
       }
     ],
     "schemaType": "modals",
+    "id": "React.CanvasHTMLAttributes",
     "name": "CanvasHTMLAttributes",
     "extends": [
       {
@@ -10605,15 +10519,14 @@
         "id": "width"
       }
     },
-    "id": "React.ColHTMLAttributes",
     "required": [],
     "templateInputs": [
       {
-        "extends": null,
         "name": "T"
       }
     ],
     "schemaType": "modals",
+    "id": "React.ColHTMLAttributes",
     "name": "ColHTMLAttributes",
     "extends": [
       {
@@ -10636,15 +10549,14 @@
         "id": "span"
       }
     },
-    "id": "React.ColgroupHTMLAttributes",
     "required": [],
     "templateInputs": [
       {
-        "extends": null,
         "name": "T"
       }
     ],
     "schemaType": "modals",
+    "id": "React.ColgroupHTMLAttributes",
     "name": "ColgroupHTMLAttributes",
     "extends": [
       {
@@ -10683,15 +10595,14 @@
         "id": "value"
       }
     },
-    "id": "React.DataHTMLAttributes",
     "required": [],
     "templateInputs": [
       {
-        "extends": null,
         "name": "T"
       }
     ],
     "schemaType": "modals",
+    "id": "React.DataHTMLAttributes",
     "name": "DataHTMLAttributes",
     "extends": [
       {
@@ -10734,15 +10645,14 @@
         "id": "name"
       }
     },
-    "id": "React.DetailsHTMLAttributes",
     "required": [],
     "templateInputs": [
       {
-        "extends": null,
         "name": "T"
       }
     ],
     "schemaType": "modals",
+    "id": "React.DetailsHTMLAttributes",
     "name": "DetailsHTMLAttributes",
     "extends": [
       {
@@ -10770,15 +10680,14 @@
         "id": "dateTime"
       }
     },
-    "id": "React.DelHTMLAttributes",
     "required": [],
     "templateInputs": [
       {
-        "extends": null,
         "name": "T"
       }
     ],
     "schemaType": "modals",
+    "id": "React.DelHTMLAttributes",
     "name": "DelHTMLAttributes",
     "extends": [
       {
@@ -10831,15 +10740,14 @@
         "id": "open"
       }
     },
-    "id": "React.DialogHTMLAttributes",
     "required": [],
     "templateInputs": [
       {
-        "extends": null,
         "name": "T"
       }
     ],
     "schemaType": "modals",
+    "id": "React.DialogHTMLAttributes",
     "name": "DialogHTMLAttributes",
     "extends": [
       {
@@ -10893,15 +10801,14 @@
         "id": "width"
       }
     },
-    "id": "React.EmbedHTMLAttributes",
     "required": [],
     "templateInputs": [
       {
-        "extends": null,
         "name": "T"
       }
     ],
     "schemaType": "modals",
+    "id": "React.EmbedHTMLAttributes",
     "name": "EmbedHTMLAttributes",
     "extends": [
       {
@@ -10934,15 +10841,14 @@
         "id": "name"
       }
     },
-    "id": "React.FieldsetHTMLAttributes",
     "required": [],
     "templateInputs": [
       {
-        "extends": null,
         "name": "T"
       }
     ],
     "schemaType": "modals",
+    "id": "React.FieldsetHTMLAttributes",
     "name": "FieldsetHTMLAttributes",
     "extends": [
       {
@@ -11000,15 +10906,14 @@
         "id": "target"
       }
     },
-    "id": "React.FormHTMLAttributes",
     "required": [],
     "templateInputs": [
       {
-        "extends": null,
         "name": "T"
       }
     ],
     "schemaType": "modals",
+    "id": "React.FormHTMLAttributes",
     "name": "FormHTMLAttributes",
     "extends": [
       {
@@ -11031,15 +10936,14 @@
         "id": "manifest"
       }
     },
-    "id": "React.HtmlHTMLAttributes",
     "required": [],
     "templateInputs": [
       {
-        "extends": null,
         "name": "T"
       }
     ],
     "schemaType": "modals",
+    "id": "React.HtmlHTMLAttributes",
     "name": "HtmlHTMLAttributes",
     "extends": [
       {
@@ -11177,15 +11081,14 @@
         "id": "width"
       }
     },
-    "id": "React.IframeHTMLAttributes",
     "required": [],
     "templateInputs": [
       {
-        "extends": null,
         "name": "T"
       }
     ],
     "schemaType": "modals",
+    "id": "React.IframeHTMLAttributes",
     "name": "IframeHTMLAttributes",
     "extends": [
       {
@@ -11341,15 +11244,14 @@
         "id": "width"
       }
     },
-    "id": "React.ImgHTMLAttributes",
     "required": [],
     "templateInputs": [
       {
-        "extends": null,
         "name": "T"
       }
     ],
     "schemaType": "modals",
+    "id": "React.ImgHTMLAttributes",
     "name": "ImgHTMLAttributes",
     "extends": [
       {
@@ -11377,15 +11279,14 @@
         "id": "dateTime"
       }
     },
-    "id": "React.InsHTMLAttributes",
     "required": [],
     "templateInputs": [
       {
-        "extends": null,
         "name": "T"
       }
     ],
     "schemaType": "modals",
+    "id": "React.InsHTMLAttributes",
     "name": "InsHTMLAttributes",
     "extends": [
       {
@@ -11648,15 +11549,14 @@
         "id": "onChange"
       }
     },
-    "id": "React.InputHTMLAttributes",
     "required": [],
     "templateInputs": [
       {
-        "extends": null,
         "name": "T"
       }
     ],
     "schemaType": "modals",
+    "id": "React.InputHTMLAttributes",
     "name": "InputHTMLAttributes",
     "extends": [
       {
@@ -11704,15 +11604,14 @@
         "id": "name"
       }
     },
-    "id": "React.KeygenHTMLAttributes",
     "required": [],
     "templateInputs": [
       {
-        "extends": null,
         "name": "T"
       }
     ],
     "schemaType": "modals",
+    "id": "React.KeygenHTMLAttributes",
     "name": "KeygenHTMLAttributes",
     "extends": [
       {
@@ -11740,15 +11639,14 @@
         "id": "htmlFor"
       }
     },
-    "id": "React.LabelHTMLAttributes",
     "required": [],
     "templateInputs": [
       {
-        "extends": null,
         "name": "T"
       }
     ],
     "schemaType": "modals",
+    "id": "React.LabelHTMLAttributes",
     "name": "LabelHTMLAttributes",
     "extends": [
       {
@@ -11787,15 +11685,14 @@
         "id": "value"
       }
     },
-    "id": "React.LiHTMLAttributes",
     "required": [],
     "templateInputs": [
       {
-        "extends": null,
         "name": "T"
       }
     ],
     "schemaType": "modals",
+    "id": "React.LiHTMLAttributes",
     "name": "LiHTMLAttributes",
     "extends": [
       {
@@ -11901,15 +11798,14 @@
         "id": "charSet"
       }
     },
-    "id": "React.LinkHTMLAttributes",
     "required": [],
     "templateInputs": [
       {
-        "extends": null,
         "name": "T"
       }
     ],
     "schemaType": "modals",
+    "id": "React.LinkHTMLAttributes",
     "name": "LinkHTMLAttributes",
     "extends": [
       {
@@ -11932,15 +11828,14 @@
         "id": "name"
       }
     },
-    "id": "React.MapHTMLAttributes",
     "required": [],
     "templateInputs": [
       {
-        "extends": null,
         "name": "T"
       }
     ],
     "schemaType": "modals",
+    "id": "React.MapHTMLAttributes",
     "name": "MapHTMLAttributes",
     "extends": [
       {
@@ -11963,15 +11858,14 @@
         "id": "type"
       }
     },
-    "id": "React.MenuHTMLAttributes",
     "required": [],
     "templateInputs": [
       {
-        "extends": null,
         "name": "T"
       }
     ],
     "schemaType": "modals",
+    "id": "React.MenuHTMLAttributes",
     "name": "MenuHTMLAttributes",
     "extends": [
       {
@@ -12039,15 +11933,14 @@
         "id": "src"
       }
     },
-    "id": "React.MediaHTMLAttributes",
     "required": [],
     "templateInputs": [
       {
-        "extends": null,
         "name": "T"
       }
     ],
     "schemaType": "modals",
+    "id": "React.MediaHTMLAttributes",
     "name": "MediaHTMLAttributes",
     "extends": [
       {
@@ -12090,15 +11983,14 @@
         "id": "name"
       }
     },
-    "id": "React.MetaHTMLAttributes",
     "required": [],
     "templateInputs": [
       {
-        "extends": null,
         "name": "T"
       }
     ],
     "schemaType": "modals",
+    "id": "React.MetaHTMLAttributes",
     "name": "MetaHTMLAttributes",
     "extends": [
       {
@@ -12183,15 +12075,14 @@
         "id": "value"
       }
     },
-    "id": "React.MeterHTMLAttributes",
     "required": [],
     "templateInputs": [
       {
-        "extends": null,
         "name": "T"
       }
     ],
     "schemaType": "modals",
+    "id": "React.MeterHTMLAttributes",
     "name": "MeterHTMLAttributes",
     "extends": [
       {
@@ -12214,15 +12105,14 @@
         "id": "cite"
       }
     },
-    "id": "React.QuoteHTMLAttributes",
     "required": [],
     "templateInputs": [
       {
-        "extends": null,
         "name": "T"
       }
     ],
     "schemaType": "modals",
+    "id": "React.QuoteHTMLAttributes",
     "name": "QuoteHTMLAttributes",
     "extends": [
       {
@@ -12301,15 +12191,14 @@
         "id": "wmode"
       }
     },
-    "id": "React.ObjectHTMLAttributes",
     "required": [],
     "templateInputs": [
       {
-        "extends": null,
         "name": "T"
       }
     ],
     "schemaType": "modals",
+    "id": "React.ObjectHTMLAttributes",
     "name": "ObjectHTMLAttributes",
     "extends": [
       {
@@ -12379,15 +12268,14 @@
         "id": "type"
       }
     },
-    "id": "React.OlHTMLAttributes",
     "required": [],
     "templateInputs": [
       {
-        "extends": null,
         "name": "T"
       }
     ],
     "schemaType": "modals",
+    "id": "React.OlHTMLAttributes",
     "name": "OlHTMLAttributes",
     "extends": [
       {
@@ -12415,15 +12303,14 @@
         "id": "label"
       }
     },
-    "id": "React.OptgroupHTMLAttributes",
     "required": [],
     "templateInputs": [
       {
-        "extends": null,
         "name": "T"
       }
     ],
     "schemaType": "modals",
+    "id": "React.OptgroupHTMLAttributes",
     "name": "OptgroupHTMLAttributes",
     "extends": [
       {
@@ -12477,15 +12364,14 @@
         "id": "value"
       }
     },
-    "id": "React.OptionHTMLAttributes",
     "required": [],
     "templateInputs": [
       {
-        "extends": null,
         "name": "T"
       }
     ],
     "schemaType": "modals",
+    "id": "React.OptionHTMLAttributes",
     "name": "OptionHTMLAttributes",
     "extends": [
       {
@@ -12518,15 +12404,14 @@
         "id": "name"
       }
     },
-    "id": "React.OutputHTMLAttributes",
     "required": [],
     "templateInputs": [
       {
-        "extends": null,
         "name": "T"
       }
     ],
     "schemaType": "modals",
+    "id": "React.OutputHTMLAttributes",
     "name": "OutputHTMLAttributes",
     "extends": [
       {
@@ -12570,15 +12455,14 @@
         "id": "value"
       }
     },
-    "id": "React.ParamHTMLAttributes",
     "required": [],
     "templateInputs": [
       {
-        "extends": null,
         "name": "T"
       }
     ],
     "schemaType": "modals",
+    "id": "React.ParamHTMLAttributes",
     "name": "ParamHTMLAttributes",
     "extends": [
       {
@@ -12630,15 +12514,14 @@
         "id": "value"
       }
     },
-    "id": "React.ProgressHTMLAttributes",
     "required": [],
     "templateInputs": [
       {
-        "extends": null,
         "name": "T"
       }
     ],
     "schemaType": "modals",
+    "id": "React.ProgressHTMLAttributes",
     "name": "ProgressHTMLAttributes",
     "extends": [
       {
@@ -12661,15 +12544,14 @@
         "id": "name"
       }
     },
-    "id": "React.SlotHTMLAttributes",
     "required": [],
     "templateInputs": [
       {
-        "extends": null,
         "name": "T"
       }
     ],
     "schemaType": "modals",
+    "id": "React.SlotHTMLAttributes",
     "name": "SlotHTMLAttributes",
     "extends": [
       {
@@ -12732,15 +12614,14 @@
         "id": "type"
       }
     },
-    "id": "React.ScriptHTMLAttributes",
     "required": [],
     "templateInputs": [
       {
-        "extends": null,
         "name": "T"
       }
     ],
     "schemaType": "modals",
+    "id": "React.ScriptHTMLAttributes",
     "name": "ScriptHTMLAttributes",
     "extends": [
       {
@@ -12829,15 +12710,14 @@
         "id": "onChange"
       }
     },
-    "id": "React.SelectHTMLAttributes",
     "required": [],
     "templateInputs": [
       {
-        "extends": null,
         "name": "T"
       }
     ],
     "schemaType": "modals",
+    "id": "React.SelectHTMLAttributes",
     "name": "SelectHTMLAttributes",
     "extends": [
       {
@@ -12906,15 +12786,14 @@
         "id": "width"
       }
     },
-    "id": "React.SourceHTMLAttributes",
     "required": [],
     "templateInputs": [
       {
-        "extends": null,
         "name": "T"
       }
     ],
     "schemaType": "modals",
+    "id": "React.SourceHTMLAttributes",
     "name": "SourceHTMLAttributes",
     "extends": [
       {
@@ -12947,15 +12826,14 @@
         "id": "type"
       }
     },
-    "id": "React.StyleHTMLAttributes",
     "required": [],
     "templateInputs": [
       {
-        "extends": null,
         "name": "T"
       }
     ],
     "schemaType": "modals",
+    "id": "React.StyleHTMLAttributes",
     "name": "StyleHTMLAttributes",
     "extends": [
       {
@@ -13102,15 +12980,14 @@
         "id": "width"
       }
     },
-    "id": "React.TableHTMLAttributes",
     "required": [],
     "templateInputs": [
       {
-        "extends": null,
         "name": "T"
       }
     ],
     "schemaType": "modals",
+    "id": "React.TableHTMLAttributes",
     "name": "TableHTMLAttributes",
     "extends": [
       {
@@ -13229,15 +13106,14 @@
         "id": "onChange"
       }
     },
-    "id": "React.TextareaHTMLAttributes",
     "required": [],
     "templateInputs": [
       {
-        "extends": null,
         "name": "T"
       }
     ],
     "schemaType": "modals",
+    "id": "React.TextareaHTMLAttributes",
     "name": "TextareaHTMLAttributes",
     "extends": [
       {
@@ -13383,15 +13259,14 @@
         "id": "valign"
       }
     },
-    "id": "React.TdHTMLAttributes",
     "required": [],
     "templateInputs": [
       {
-        "extends": null,
         "name": "T"
       }
     ],
     "schemaType": "modals",
+    "id": "React.TdHTMLAttributes",
     "name": "TdHTMLAttributes",
     "extends": [
       {
@@ -13476,15 +13351,14 @@
         "id": "abbr"
       }
     },
-    "id": "React.ThHTMLAttributes",
     "required": [],
     "templateInputs": [
       {
-        "extends": null,
         "name": "T"
       }
     ],
     "schemaType": "modals",
+    "id": "React.ThHTMLAttributes",
     "name": "ThHTMLAttributes",
     "extends": [
       {
@@ -13507,15 +13381,14 @@
         "id": "dateTime"
       }
     },
-    "id": "React.TimeHTMLAttributes",
     "required": [],
     "templateInputs": [
       {
-        "extends": null,
         "name": "T"
       }
     ],
     "schemaType": "modals",
+    "id": "React.TimeHTMLAttributes",
     "name": "TimeHTMLAttributes",
     "extends": [
       {
@@ -13558,15 +13431,14 @@
         "id": "srcLang"
       }
     },
-    "id": "React.TrackHTMLAttributes",
     "required": [],
     "templateInputs": [
       {
-        "extends": null,
         "name": "T"
       }
     ],
     "schemaType": "modals",
+    "id": "React.TrackHTMLAttributes",
     "name": "TrackHTMLAttributes",
     "extends": [
       {
@@ -13630,15 +13502,14 @@
         "id": "disableRemotePlayback"
       }
     },
-    "id": "React.VideoHTMLAttributes",
     "required": [],
     "templateInputs": [
       {
-        "extends": null,
         "name": "T"
       }
     ],
     "schemaType": "modals",
+    "id": "React.VideoHTMLAttributes",
     "name": "VideoHTMLAttributes",
     "extends": [
       {
@@ -16784,15 +16655,14 @@
         "id": "zoomAndPan"
       }
     },
-    "id": "React.SVGAttributes",
     "required": [],
     "templateInputs": [
       {
-        "extends": null,
         "name": "T"
       }
     ],
     "schemaType": "modals",
+    "id": "React.SVGAttributes",
     "name": "SVGAttributes",
     "extends": [
       {
@@ -16894,15 +16764,14 @@
         "id": "webpreferences"
       }
     },
-    "id": "React.WebViewHTMLAttributes",
     "required": [],
     "templateInputs": [
       {
-        "extends": null,
         "name": "T"
       }
     ],
     "schemaType": "modals",
+    "id": "React.WebViewHTMLAttributes",
     "name": "WebViewHTMLAttributes",
     "extends": [
       {
@@ -20460,7 +20329,6 @@
         "id": "webview"
       }
     },
-    "id": "React.ReactHTML",
     "required": [
       "a",
       "abbr",
@@ -20583,6 +20451,7 @@
     ],
     "templateInputs": [],
     "schemaType": "modals",
+    "id": "React.ReactHTML",
     "name": "ReactHTML",
     "extends": []
   },
@@ -21470,7 +21339,6 @@
         "id": "view"
       }
     },
-    "id": "React.ReactSVG",
     "required": [
       "animate",
       "circle",
@@ -21530,16 +21398,17 @@
     ],
     "templateInputs": [],
     "schemaType": "modals",
+    "id": "React.ReactSVG",
     "name": "ReactSVG",
     "extends": []
   },
   "React.ReactDOM": {
     "type": "OBJECT",
     "properties": {},
-    "id": "React.ReactDOM",
     "required": [],
     "templateInputs": [],
     "schemaType": "modals",
+    "id": "React.ReactDOM",
     "name": "ReactDOM",
     "extends": [
       {
@@ -21882,7 +21751,6 @@
         "id": "exact"
       }
     },
-    "id": "React.ReactPropTypes",
     "required": [
       "any",
       "array",
@@ -21903,6 +21771,7 @@
     ],
     "templateInputs": [],
     "schemaType": "modals",
+    "id": "React.ReactPropTypes",
     "name": "ReactPropTypes",
     "extends": []
   },
@@ -22016,7 +21885,6 @@
                             {
                               "type": "OBJECT",
                               "properties": {},
-                              "id": null,
                               "required": []
                             }
                           ]
@@ -22053,7 +21921,6 @@
         "id": "toArray"
       }
     },
-    "id": "React.ReactChildren",
     "required": [
       "map",
       "forEach",
@@ -22063,6 +21930,7 @@
     ],
     "templateInputs": [],
     "schemaType": "modals",
+    "id": "React.ReactChildren",
     "name": "ReactChildren",
     "extends": []
   },
@@ -22082,13 +21950,13 @@
         "id": "document"
       }
     },
-    "id": "React.AbstractView",
     "required": [
       "styleMedia",
       "document"
     ],
     "templateInputs": [],
     "schemaType": "modals",
+    "id": "React.AbstractView",
     "name": "AbstractView",
     "extends": []
   },
@@ -22137,7 +22005,6 @@
         "id": "pageY"
       }
     },
-    "id": "React.Touch",
     "required": [
       "identifier",
       "target",
@@ -22150,6 +22017,7 @@
     ],
     "templateInputs": [],
     "schemaType": "modals",
+    "id": "React.Touch",
     "name": "Touch",
     "extends": []
   },
@@ -22194,7 +22062,6 @@
         "id": "identifiedTouch"
       }
     },
-    "id": "React.TouchList",
     "required": [
       "length",
       "item",
@@ -22202,6 +22069,7 @@
     ],
     "templateInputs": [],
     "schemaType": "modals",
+    "id": "React.TouchList",
     "name": "TouchList",
     "extends": []
   },
@@ -22219,20 +22087,20 @@
         "id": "digest"
       }
     },
-    "id": "React.ErrorInfo",
     "required": [],
     "templateInputs": [],
     "schemaType": "modals",
+    "id": "React.ErrorInfo",
     "name": "ErrorInfo",
     "extends": []
   },
   "React.JSX.Element": {
     "type": "OBJECT",
     "properties": {},
-    "id": "React.JSX.Element",
     "required": [],
     "templateInputs": [],
     "schemaType": "modals",
+    "id": "React.JSX.Element",
     "name": "Element",
     "extends": [
       {
@@ -22244,10 +22112,10 @@
   "React.JSX.ElementClass": {
     "type": "OBJECT",
     "properties": {},
-    "id": "React.JSX.ElementClass",
     "required": [],
     "templateInputs": [],
     "schemaType": "modals",
+    "id": "React.JSX.ElementClass",
     "name": "ElementClass",
     "extends": [
       {
@@ -22259,10 +22127,10 @@
   "React.JSX.ElementAttributesProperty": {
     "type": "OBJECT",
     "properties": {},
-    "id": "React.JSX.ElementAttributesProperty",
     "required": [],
     "templateInputs": [],
     "schemaType": "modals",
+    "id": "React.JSX.ElementAttributesProperty",
     "name": "ElementAttributesProperty",
     "extends": [
       {
@@ -22274,10 +22142,10 @@
   "React.JSX.ElementChildrenAttribute": {
     "type": "OBJECT",
     "properties": {},
-    "id": "React.JSX.ElementChildrenAttribute",
     "required": [],
     "templateInputs": [],
     "schemaType": "modals",
+    "id": "React.JSX.ElementChildrenAttribute",
     "name": "ElementChildrenAttribute",
     "extends": [
       {
@@ -22289,10 +22157,10 @@
   "React.JSX.IntrinsicAttributes": {
     "type": "OBJECT",
     "properties": {},
-    "id": "React.JSX.IntrinsicAttributes",
     "required": [],
     "templateInputs": [],
     "schemaType": "modals",
+    "id": "React.JSX.IntrinsicAttributes",
     "name": "IntrinsicAttributes",
     "extends": [
       {
@@ -22304,15 +22172,14 @@
   "React.JSX.IntrinsicClassAttributes": {
     "type": "OBJECT",
     "properties": {},
-    "id": "React.JSX.IntrinsicClassAttributes",
     "required": [],
     "templateInputs": [
       {
-        "extends": null,
         "name": "T"
       }
     ],
     "schemaType": "modals",
+    "id": "React.JSX.IntrinsicClassAttributes",
     "name": "IntrinsicClassAttributes",
     "extends": [
       {
@@ -22329,10 +22196,10 @@
   "React.JSX.IntrinsicElements": {
     "type": "OBJECT",
     "properties": {},
-    "id": "React.JSX.IntrinsicElements",
     "required": [],
     "templateInputs": [],
     "schemaType": "modals",
+    "id": "React.JSX.IntrinsicElements",
     "name": "IntrinsicElements",
     "extends": [
       {
@@ -22344,10 +22211,10 @@
   "global.JSX.Element": {
     "type": "OBJECT",
     "properties": {},
-    "id": "global.JSX.Element",
     "required": [],
     "templateInputs": [],
     "schemaType": "modals",
+    "id": "global.JSX.Element",
     "name": "Element",
     "extends": [
       {
@@ -22382,12 +22249,12 @@
         "id": "render"
       }
     },
-    "id": "global.JSX.ElementClass",
     "required": [
       "render"
     ],
     "templateInputs": [],
     "schemaType": "modals",
+    "id": "global.JSX.ElementClass",
     "name": "ElementClass",
     "extends": [
       {
@@ -22399,7 +22266,6 @@
           {
             "type": "OBJECT",
             "properties": {},
-            "id": null,
             "required": []
           },
           {
@@ -22415,17 +22281,17 @@
       "props": {
         "type": "OBJECT",
         "properties": {},
-        "id": "props",
         "required": [],
-        "name": "props"
+        "name": "props",
+        "id": "props"
       }
     },
-    "id": "global.JSX.ElementAttributesProperty",
     "required": [
       "props"
     ],
     "templateInputs": [],
     "schemaType": "modals",
+    "id": "global.JSX.ElementAttributesProperty",
     "name": "ElementAttributesProperty",
     "extends": []
   },
@@ -22435,27 +22301,27 @@
       "children": {
         "type": "OBJECT",
         "properties": {},
-        "id": "children",
         "required": [],
-        "name": "children"
+        "name": "children",
+        "id": "children"
       }
     },
-    "id": "global.JSX.ElementChildrenAttribute",
     "required": [
       "children"
     ],
     "templateInputs": [],
     "schemaType": "modals",
+    "id": "global.JSX.ElementChildrenAttribute",
     "name": "ElementChildrenAttribute",
     "extends": []
   },
   "global.JSX.IntrinsicAttributes": {
     "type": "OBJECT",
     "properties": {},
-    "id": "global.JSX.IntrinsicAttributes",
     "required": [],
     "templateInputs": [],
     "schemaType": "modals",
+    "id": "global.JSX.IntrinsicAttributes",
     "name": "IntrinsicAttributes",
     "extends": [
       {
@@ -22467,15 +22333,14 @@
   "global.JSX.IntrinsicClassAttributes": {
     "type": "OBJECT",
     "properties": {},
-    "id": "global.JSX.IntrinsicClassAttributes",
     "required": [],
     "templateInputs": [
       {
-        "extends": null,
         "name": "T"
       }
     ],
     "schemaType": "modals",
+    "id": "global.JSX.IntrinsicClassAttributes",
     "name": "IntrinsicClassAttributes",
     "extends": [
       {
@@ -26117,7 +25982,6 @@
         "id": "view"
       }
     },
-    "id": "global.JSX.IntrinsicElements",
     "required": [
       "a",
       "abbr",
@@ -26300,16 +26164,17 @@
     ],
     "templateInputs": [],
     "schemaType": "modals",
+    "id": "global.JSX.IntrinsicElements",
     "name": "IntrinsicElements",
     "extends": []
   },
   "GlobalJSXElement": {
     "type": "OBJECT",
     "properties": {},
-    "id": "GlobalJSXElement",
     "required": [],
     "templateInputs": [],
     "schemaType": "modals",
+    "id": "GlobalJSXElement",
     "name": "GlobalJSXElement",
     "extends": [
       {
@@ -26321,10 +26186,10 @@
   "GlobalJSXElementClass": {
     "type": "OBJECT",
     "properties": {},
-    "id": "GlobalJSXElementClass",
     "required": [],
     "templateInputs": [],
     "schemaType": "modals",
+    "id": "GlobalJSXElementClass",
     "name": "GlobalJSXElementClass",
     "extends": [
       {
@@ -26336,10 +26201,10 @@
   "GlobalJSXElementAttributesProperty": {
     "type": "OBJECT",
     "properties": {},
-    "id": "GlobalJSXElementAttributesProperty",
     "required": [],
     "templateInputs": [],
     "schemaType": "modals",
+    "id": "GlobalJSXElementAttributesProperty",
     "name": "GlobalJSXElementAttributesProperty",
     "extends": [
       {
@@ -26351,10 +26216,10 @@
   "GlobalJSXElementChildrenAttribute": {
     "type": "OBJECT",
     "properties": {},
-    "id": "GlobalJSXElementChildrenAttribute",
     "required": [],
     "templateInputs": [],
     "schemaType": "modals",
+    "id": "GlobalJSXElementChildrenAttribute",
     "name": "GlobalJSXElementChildrenAttribute",
     "extends": [
       {
@@ -26366,10 +26231,10 @@
   "GlobalJSXIntrinsicAttributes": {
     "type": "OBJECT",
     "properties": {},
-    "id": "GlobalJSXIntrinsicAttributes",
     "required": [],
     "templateInputs": [],
     "schemaType": "modals",
+    "id": "GlobalJSXIntrinsicAttributes",
     "name": "GlobalJSXIntrinsicAttributes",
     "extends": [
       {
@@ -26381,15 +26246,14 @@
   "GlobalJSXIntrinsicClassAttributes": {
     "type": "OBJECT",
     "properties": {},
-    "id": "GlobalJSXIntrinsicClassAttributes",
     "required": [],
     "templateInputs": [
       {
-        "extends": null,
         "name": "T"
       }
     ],
     "schemaType": "modals",
+    "id": "GlobalJSXIntrinsicClassAttributes",
     "name": "GlobalJSXIntrinsicClassAttributes",
     "extends": [
       {
@@ -26406,10 +26270,10 @@
   "GlobalJSXIntrinsicElements": {
     "type": "OBJECT",
     "properties": {},
-    "id": "GlobalJSXIntrinsicElements",
     "required": [],
     "templateInputs": [],
     "schemaType": "modals",
+    "id": "GlobalJSXIntrinsicElements",
     "name": "GlobalJSXIntrinsicElements",
     "extends": [
       {
