@@ -1,5 +1,3 @@
-import { BaseType } from "ts-json-schema-generator";
-
 export namespace BreezeSchema {
   export interface BaseType {
     type:
