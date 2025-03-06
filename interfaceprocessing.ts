@@ -205,7 +205,7 @@ function checkBaseTypes(
     };
   } else if (type.isUnion()) {
     const alias = type.getAliasSymbol()?.getFullyQualifiedName();
-    if (alias && (!bypassRef)) {
+    if (alias && (!bypassRef||true)) {
       return {
         $ref: alias,
       };
