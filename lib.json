@@ -1,5 +1,5 @@
 {
-  "Intl.CollatorOptions": {
+  "JsLib.Intl.CollatorOptions": {
     "type": "OBJECT",
     "properties": {
       "usage": {

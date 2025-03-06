@@ -2,19 +2,17 @@ import {
   InterfaceDeclaration,
   ModuleDeclaration,
   Node,
-  Project,
+  Project,ts,
   Type,
   TypeAliasDeclaration,
 } from "ts-morph";
 import * as fs from "fs";
 import { BreezeSchema } from "./BREEZE_SchemaTyping";
 import * as path from "path";
+// import ts from "typescript";
 
 const project = new Project();
-const conf: Record<
-  string,
-  BreezeSchema.SchemaModals | BreezeSchema.CombinedType
-> = {};
+const conf: Record<string, BreezeSchema.StoredSchema> = {};
 const sourceFilePath = process.argv[2];
 let outputFile = process.argv[3];
 
@@ -57,7 +55,7 @@ function processInterface(
 
   if (conf[id]?.schemaType === "modals") {
     console.warn(`Merging duplicate schema for: ${id}`);
-    const schema = conf[id];
+    const schema = conf[id] as BreezeSchema.SchemaModals;
     // Merge properties
     schema.properties = {
       ...schema.properties,
@@ -81,7 +79,7 @@ function processInterface(
     id: id,
     name,
     extends: extending,
-  };
+  } as BreezeSchema.SchemaModals;
 }
 
 function processModule(
@@ -95,7 +93,11 @@ function processModule(
     prefix = `${module.getName()}.`;
   }
   module.getInterfaces().forEach((i) => processInterface(i, prefix));
+
+  module.getTypeAliases().forEach((t) => processTypeAlias(t,prefix));
+
   module.getModules().forEach((m) => processModule(m, prefix));
+  
 }
 
 function processTypeAlias(
@@ -104,7 +106,15 @@ function processTypeAlias(
 ) {
   const name = t.getName();
   const id = idPrefix + name;
-  console.log(name);
+  const type = checkAndConverToUnion(processType(t.getType(),true));
+
+  const combinedType: BreezeSchema.CombinedType = {
+    schemaType: "combined_schema",
+    name: name,
+    ...type,
+    id: id,
+  };
+  conf[id] = combinedType;
 }
 
 source.getModules().forEach((m) => processModule(m));
@@ -112,16 +122,17 @@ source.getInterfaces().forEach((i) => processInterface(i));
 source.getTypeAliases().forEach((t) => processTypeAlias(t));
 
 function processType(
-  type: Type
+  type: Type,bypassRef: boolean = false
 ): BreezeSchema.BaseType | BreezeSchema.Type | BreezeSchema.ReferencedType {
   if (!type) {
     return {
       type: "ANY",
       case: "UNDEFINED TYPE",
-    };
+    } as BreezeSchema.AnyType;
   }
+  
 
-  const base = checkBaseTypes(type);
+  const base = checkBaseTypes(type,bypassRef);
   if (base) {
     return base;
   } else if (type.getCallSignatures().length > 0) {
@@ -129,6 +140,7 @@ function processType(
   }
   //KEEP IT AT THE END
   else if (type.isObject() && !type.isArray()) {
+    
     const name = type.getSymbol()?.getName();
     if (name && name != "__type") {
       // const typeName = symbol.getName();
@@ -154,12 +166,17 @@ function processType(
     };
   } else {
     // throw Error("HERE"+ type.getText()+type.isObject());
-    return { type: "UNKNOWN_TYPE", raw: type.getText() };
+    // console.log(type.getFlags(), type.getText())
+    const obj: BreezeSchema.UnknownType = {
+      type: "UNKNOWN_TYPE",
+      raw: type.getText(),
+    };
+    return obj;
   }
 }
 
 function checkBaseTypes(
-  type: Type
+  type: Type,bypassRef:boolean = false
 ):
   | BreezeSchema.BaseType
   | BreezeSchema.Type
@@ -175,15 +192,20 @@ function checkBaseTypes(
     return { type: "STRING" };
   } else if (type.isBoolean()) {
     return { type: "BOOLEAN" };
+  } else if (
+    type.getFlags() & ts.TypeFlags.UniqueESSymbol ||
+    type.getFlags() & ts.TypeFlags.ESSymbol
+  ) {
+    return { type: "SYMBOL" }; // Correctly detect 'symbol'
   } else if (type.isArray()) {
     const itemType = type.getArrayElementTypeOrThrow();
     return {
       type: "ARRAY",
-      templateInput: [processType(itemType)],
+      templateInputs: [processType(itemType)],
     };
   } else if (type.isUnion()) {
     const alias = type.getAliasSymbol()?.getFullyQualifiedName();
-    if (alias) {
+    if (alias && (!bypassRef)) {
       return {
         $ref: alias,
       };
@@ -214,6 +236,15 @@ function checkBaseTypes(
 }
 
 function getLiteralType(type: Type): BreezeSchema.LITERAL | false {
+  if (type.isBooleanLiteral()) {
+    return {
+      type: "LITERAL",
+      value: {
+        type: "BOOLEAN",
+        value: type.getText() === "true", // Convert "true"/"false" string to actual boolean
+      },
+    };
+  }
   if (type.isLiteral()) {
     const value = type.getLiteralValue();
 
@@ -241,6 +272,18 @@ function getBaseValueType(value: unknown) {
   throw new Error(`Unsupported literal type: ${typeof value}`);
 }
 
+function checkAndConverToUnion(
+  t: BreezeSchema.BaseType | BreezeSchema.Type | BreezeSchema.ReferencedType
+): BreezeSchema.Type {
+  if ("types" in t) {
+    return t;
+  }
+  return {
+    selection: "anyOf",
+    types: [t],
+  };
+}
+
 function processObject(obj: Type): BreezeSchema.ObjectType {
   const properties: BreezeSchema.ObjectType["properties"] = {};
   const symbol = obj.getSymbol();
@@ -250,7 +293,7 @@ function processObject(obj: Type): BreezeSchema.ObjectType {
     [...declaration.getProperties(), ...declaration.getMethods()].forEach(
       (prop) => {
         const propType = prop.getType();
-        const property = processType(propType);
+        const property = checkAndConverToUnion(processType(propType));
         const name = prop.getName();
         if (prop.getSymbol()?.isOptional() === false) {
           required.push(name);
@@ -266,7 +309,7 @@ function processObject(obj: Type): BreezeSchema.ObjectType {
         throw Error("Object declaration not found");
       }
       const propType = prop.getTypeAtLocation(declaration);
-      const property = processType(propType);
+      const property = checkAndConverToUnion(processType(propType));
       const name = prop.getName();
       if (!prop.isOptional()) {
         required.push(name);
@@ -319,6 +362,7 @@ function processFunction(func: Type): BreezeSchema.FunctionType {
     isAsync: false,
   };
 }
+console.log(outputFile);
 fs.writeFileSync(
   outputFile,
   JSON.stringify(conf, (_, s) => (s === undefined ? null : s), 2)

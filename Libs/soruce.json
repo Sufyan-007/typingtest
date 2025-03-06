@@ -1,0 +1,13 @@
+{
+  "s": {
+    "schemaType": "combined_schema",
+    "name": "s",
+    "selection": "anyOf",
+    "types": [
+      {
+        "type": "STRING"
+      }
+    ],
+    "id": "s"
+  }
+}
