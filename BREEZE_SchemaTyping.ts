@@ -97,12 +97,9 @@ export namespace BreezeSchema {
   }
 
   export interface Type {
-    selection: "anyOf" | "oneOf" | "allOf";
+    selection: "anyOf" | "oneOf" | "allOf" |"conditional";
     // At least one element Must be in the array
     types: Array<BaseType | ReferencedType | Type>;
   }
 
-  export interface Test {
-    hello: "World";
-  }
 }

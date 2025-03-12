@@ -1,10 +1,14 @@
 import {
+  ConditionalTypeNode,
   InterfaceDeclaration,
   ModuleDeclaration,
   Node,
-  Project,ts,
+  Project,
+  SourceFile,
+  ts,
   Type,
   TypeAliasDeclaration,
+  TypeFlags,
 } from "ts-morph";
 import * as fs from "fs";
 import { BreezeSchema } from "./BREEZE_SchemaTyping";
@@ -21,13 +25,14 @@ if (!sourceFilePath) {
   console.error("Usage: npx tsx file.ts source.ts");
   process.exit(1);
 }
-const source = project.addSourceFileAtPath(sourceFilePath);
+type mySource = {meta:String}
+const source = project.addSourceFileAtPath(sourceFilePath) as SourceFile&mySource;
 if (!outputFile) {
   const inputDir = path.dirname(sourceFilePath);
   const fileName = path.basename(sourceFilePath, path.extname(sourceFilePath)); // Get the file name without extension
   outputFile = path.join(inputDir, `${fileName}.json`);
 }
-
+source.meta = "Helllo there"
 function processInterface(
   i: InterfaceDeclaration,
   idPrefix: "" | `${string}.` = ""
@@ -94,10 +99,9 @@ function processModule(
   }
   module.getInterfaces().forEach((i) => processInterface(i, prefix));
 
-  module.getTypeAliases().forEach((t) => processTypeAlias(t,prefix));
+  module.getTypeAliases().forEach((t) => processTypeAlias(t, prefix));
 
   module.getModules().forEach((m) => processModule(m, prefix));
-  
 }
 
 function processTypeAlias(
@@ -106,7 +110,7 @@ function processTypeAlias(
 ) {
   const name = t.getName();
   const id = idPrefix + name;
-  const type = checkAndConverToUnion(processType(t.getType(),true));
+  const type = checkAndConverToUnion(processType(t.getType(), true));
 
   const combinedType: BreezeSchema.CombinedType = {
     schemaType: "combined_schema",
@@ -122,7 +126,8 @@ source.getInterfaces().forEach((i) => processInterface(i));
 source.getTypeAliases().forEach((t) => processTypeAlias(t));
 
 function processType(
-  type: Type,bypassRef: boolean = false
+  type: Type,
+  bypassRef: boolean = false
 ): BreezeSchema.BaseType | BreezeSchema.Type | BreezeSchema.ReferencedType {
   if (!type) {
     return {
@@ -130,17 +135,26 @@ function processType(
       case: "UNDEFINED TYPE",
     } as BreezeSchema.AnyType;
   }
-  
 
-  const base = checkBaseTypes(type,bypassRef);
+  if (
+    type.compilerType.flags & TypeFlags.Conditional ||
+    type.compilerType.flags & TypeFlags.IndexedAccess
+  ) {
+    return {
+      type: "UNKNOWN_TYPE",
+      raw: "At least this came here isntead",
+    } as BreezeSchema.UnknownType;
+  }
+
+  const base = checkBaseTypes(type, bypassRef);
   if (base) {
     return base;
   } else if (type.getCallSignatures().length > 0) {
     return processFunction(type);
   }
+
   //KEEP IT AT THE END
   else if (type.isObject() && !type.isArray()) {
-    
     const name = type.getSymbol()?.getName();
     if (name && name != "__type") {
       // const typeName = symbol.getName();
@@ -164,19 +178,31 @@ function processType(
     return {
       type: "STRING",
     };
+  } else if (type.getAliasSymbol()) {
+    const typeArguments = type.getTypeArguments();
+    return {
+      $ref: type.getAliasSymbol()?.getName(),
+      templateInputs: typeArguments.map((t) => processType(t)),
+    };
   } else {
     // throw Error("HERE"+ type.getText()+type.isObject());
-    // console.log(type.getFlags(), type.getText())
+    console.log(
+      type.getAliasSymbol(),
+      type.getUnionTypes(),
+      type.getText(),
+      type.compilerType.flags
+    );
     const obj: BreezeSchema.UnknownType = {
       type: "UNKNOWN_TYPE",
-      raw: type.getText(),
+      raw: type.getText() + "THe heck is this",
     };
     return obj;
   }
 }
 
 function checkBaseTypes(
-  type: Type,bypassRef:boolean = false
+  type: Type,
+  bypassRef: boolean = false
 ):
   | BreezeSchema.BaseType
   | BreezeSchema.Type
@@ -204,8 +230,8 @@ function checkBaseTypes(
       templateInputs: [processType(itemType)],
     };
   } else if (type.isUnion()) {
-    const alias = type.getAliasSymbol()?.getFullyQualifiedName();
-    if (alias && (!bypassRef||true)) {
+    const alias = type.getAliasSymbol()?.getName();
+    if (alias && !bypassRef) {
       return {
         $ref: alias,
       };
@@ -215,6 +241,12 @@ function checkBaseTypes(
       types: type.getUnionTypes().map((t) => processType(t)),
     };
   } else if (type.isIntersection()) {
+    const alias = type.getAliasSymbol()?.getName();
+    if (alias && !bypassRef) {
+      return {
+        $ref: alias,
+      };
+    }
     return {
       selection: "anyOf",
       types: type.getIntersectionTypes().map((t) => processType(t)),
@@ -227,6 +259,8 @@ function checkBaseTypes(
     return { type: "VOID" };
   } else if (type.isNever()) {
     return { type: "ANY" };
+  } else if (type.isBigInt()) {
+    return { type: "NUMERIC" };
   } else if (type.isUndefined()) {
     return { type: "UNDEFINED" };
   } else if (type.isNull()) {

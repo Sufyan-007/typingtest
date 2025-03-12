@@ -1,13 +1,59 @@
 {
-  "s": {
-    "schemaType": "combined_schema",
-    "name": "s",
-    "selection": "anyOf",
-    "types": [
-      {
-        "type": "STRING"
+  "A": {
+    "type": "OBJECT",
+    "properties": {
+      "a": {
+        "selection": "anyOf",
+        "types": [
+          {
+            "type": "STRING"
+          }
+        ],
+        "name": "a",
+        "id": "a"
       }
+    },
+    "required": [
+      "a"
     ],
-    "id": "s"
+    "templateInputs": [],
+    "schemaType": "modals",
+    "id": "A",
+    "name": "A",
+    "extends": []
+  },
+  "B": {
+    "type": "OBJECT",
+    "properties": {
+      "b": {
+        "selection": "anyOf",
+        "types": [
+          {
+            "type": "STRING"
+          }
+        ],
+        "name": "b",
+        "id": "b"
+      },
+      "c": {
+        "selection": "anyOf",
+        "types": [
+          {
+            "type": "STRING"
+          }
+        ],
+        "name": "c",
+        "id": "c"
+      }
+    },
+    "required": [
+      "b",
+      "c"
+    ],
+    "templateInputs": [],
+    "schemaType": "modals",
+    "id": "B",
+    "name": "B",
+    "extends": []
   }
 }
