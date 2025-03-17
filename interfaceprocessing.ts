@@ -25,14 +25,15 @@ if (!sourceFilePath) {
   console.error("Usage: npx tsx file.ts source.ts");
   process.exit(1);
 }
-type mySource = {meta:String}
-const source = project.addSourceFileAtPath(sourceFilePath) as SourceFile&mySource;
+type mySource = { meta: String };
+const source = project.addSourceFileAtPath(sourceFilePath) as SourceFile &
+  mySource;
 if (!outputFile) {
   const inputDir = path.dirname(sourceFilePath);
   const fileName = path.basename(sourceFilePath, path.extname(sourceFilePath)); // Get the file name without extension
   outputFile = path.join(inputDir, `${fileName}.json`);
 }
-source.meta = "Helllo there"
+source.meta = "Helllo there";
 function processInterface(
   i: InterfaceDeclaration,
   idPrefix: "" | `${string}.` = ""
@@ -121,9 +122,9 @@ function processTypeAlias(
   conf[id] = combinedType;
 }
 
-source.getModules().forEach((m) => processModule(m));
-source.getInterfaces().forEach((i) => processInterface(i));
-source.getTypeAliases().forEach((t) => processTypeAlias(t));
+// source.getModules().forEach((m) => processModule(m));
+// source.getInterfaces().forEach((i) => processInterface(i));
+// source.getTypeAliases().forEach((t) => processTypeAlias(t));
 
 function processType(
   type: Type,
@@ -401,3 +402,16 @@ fs.writeFileSync(
   outputFile,
   JSON.stringify(conf, (_, s) => (s === undefined ? null : s), 2)
 );
+const baseSource = project.createSourceFile("sorucesss.ts", "console.log()");
+
+const base:string[] = [];
+baseSource
+  .getChildren()
+  .forEach((c) => c.getSymbolsInScope(-1).forEach((m) => base.push(m.getName())));
+source.getChildren().forEach((c) => {
+  c.getSymbolsInScope(-1).forEach((s) => {
+    if (!base.includes(s.getName())) {
+      console.log(s.getEscapedName());
+    }
+  });
+});
