@@ -1,0 +1,82 @@
+{
+  "Property.AnimationDelay": {
+    "type": "OBJECT",
+    "properties": {
+      "x": {
+        "selection": "anyOf",
+        "types": [
+          {
+            "$ref": "X",
+            "refType": "TEMPLATE"
+          }
+        ],
+        "name": "x",
+        "id": "x"
+      }
+    },
+    "required": [
+      "x"
+    ],
+    "templateInputs": [
+      {
+        "name": "X"
+      }
+    ],
+    "schemaType": "modals",
+    "id": "Property.AnimationDelay",
+    "name": "AnimationDelay",
+    "extends": []
+  },
+  "Property.AnimationDirection": {
+    "type": "OBJECT",
+    "properties": {},
+    "required": [],
+    "templateInputs": [],
+    "schemaType": "modals",
+    "id": "Property.AnimationDirection",
+    "name": "AnimationDirection",
+    "extends": []
+  },
+  "StandardLonghandProperties": {
+    "type": "OBJECT",
+    "properties": {
+      "animationDelay": {
+        "selection": "anyOf",
+        "types": [
+          {
+            "$ref": "AnimationDelay",
+            "templateInputs": [
+              {
+                "$ref": "TTime",
+                "refType": "TEMPLATE"
+              }
+            ]
+          }
+        ],
+        "name": "animationDelay",
+        "id": "animationDelay"
+      },
+      "animationDirection": {
+        "selection": "anyOf",
+        "types": [
+          {
+            "$ref": "AnimationDirection",
+            "templateInputs": []
+          }
+        ],
+        "name": "animationDirection",
+        "id": "animationDirection"
+      }
+    },
+    "required": [],
+    "templateInputs": [
+      {
+        "name": "TTime"
+      }
+    ],
+    "schemaType": "modals",
+    "id": "StandardLonghandProperties",
+    "name": "StandardLonghandProperties",
+    "extends": []
+  }
+}

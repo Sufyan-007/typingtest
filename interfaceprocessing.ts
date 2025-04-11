@@ -1,5 +1,4 @@
 import {
-  ConditionalTypeNode,
   InterfaceDeclaration,
   ModuleDeclaration,
   Node,
@@ -14,6 +13,21 @@ import * as fs from "fs";
 import { BreezeSchema } from "./BREEZE_SchemaTyping";
 import * as path from "path";
 // import ts from "typescript";
+
+
+
+
+function extractFinalQualifiedName(str:string) {
+  str = str.replace(/^"|"$/g, "");
+
+  const quoteSplit = str.split('"');
+  const afterPath = quoteSplit.length > 1 ? quoteSplit[quoteSplit.length - 1]||"" : str;
+
+  return afterPath.startsWith('.') ? afterPath.slice(1) : afterPath;
+}
+
+
+
 
 const project = new Project();
 const conf: Record<string, BreezeSchema.StoredSchema> = {};
@@ -45,6 +59,7 @@ function processInterface(
   i.getTypeParameters().forEach((template) => {
     const symbol = template.getSymbol();
     const name = symbol?.getName() || "Unknown";
+    console.log(name);
     const constraints = template.getType().getConstraint();
     templateInputs.push({
       ...(constraints && { extends: processType(constraints) }),
@@ -110,8 +125,23 @@ function processTypeAlias(
   idPrefix: "" | `${string}.` = ""
 ) {
   const name = t.getName();
+
+  let type: BreezeSchema.Type;
+
   const id = idPrefix + name;
-  const type = checkAndConverToUnion(processType(t.getType(), true));
+
+  if (!["HeadersInit"].includes(name)) {
+    type = checkAndConverToUnion(processType(t.getType(), true));
+  } else {
+    type = {
+      selection: "anyOf",
+      types: [
+        {
+          type: "UNKNOWN_TYPE",
+        },
+      ],
+    };
+  }
 
   const combinedType: BreezeSchema.CombinedType = {
     schemaType: "combined_schema",
@@ -122,9 +152,9 @@ function processTypeAlias(
   conf[id] = combinedType;
 }
 
-// source.getModules().forEach((m) => processModule(m));
-// source.getInterfaces().forEach((i) => processInterface(i));
-// source.getTypeAliases().forEach((t) => processTypeAlias(t));
+source.getModules().forEach((m) => processModule(m));
+source.getInterfaces().forEach((i) => processInterface(i));
+source.getTypeAliases().forEach((t) => processTypeAlias(t));
 
 function processType(
   type: Type,
@@ -231,7 +261,7 @@ function checkBaseTypes(
       templateInputs: [processType(itemType)],
     };
   } else if (type.isUnion()) {
-    const alias = type.getAliasSymbol()?.getName();
+    const alias = extractFinalQualifiedName(type.getAliasSymbol()?.getFullyQualifiedName()||"");
     if (alias && !bypassRef) {
       return {
         $ref: alias,
@@ -328,28 +358,52 @@ function processObject(obj: Type): BreezeSchema.ObjectType {
     [...declaration.getProperties(), ...declaration.getMethods()].forEach(
       (prop) => {
         const propType = prop.getType();
-        const property = checkAndConverToUnion(processType(propType));
         const name = prop.getName();
-        if (prop.getSymbol()?.isOptional() === false) {
-          required.push(name);
-        }
+        // console.log(name);
+        if (!["tee", "view"].includes(name)) {
+          const property = checkAndConverToUnion(processType(propType));
+          if (prop.getSymbol()?.isOptional() === false) {
+            required.push(name);
+          }
 
-        properties[name] = { ...property, name, id: name };
+          properties[name] = { ...property, name, id: name };
+        } else {
+          // console.log("property " + name);
+          properties[name] = {
+            types: [{ type: "UNKNOWN_TYPE" }],
+            selection: "anyOf",
+            name,
+            id: name,
+          };
+        }
       }
     );
   } else {
     obj.getProperties().forEach((prop) => {
       const declaration = prop.getDeclarations()[0];
       if (!declaration) {
+        console.log(prop.getName(), obj.getText());
         throw Error("Object declaration not found");
       }
-      const propType = prop.getTypeAtLocation(declaration);
-      const property = checkAndConverToUnion(processType(propType));
+      // console.log(prop.getName());
       const name = prop.getName();
-      if (!prop.isOptional()) {
-        required.push(name);
+
+      if (!["tee"].includes(name)) {
+        const propType = prop.getTypeAtLocation(declaration);
+        const property = checkAndConverToUnion(processType(propType));
+        if (!prop.isOptional()) {
+          required.push(name);
+        }
+        properties[name] = { ...property, name, id: name };
+      } else {
+        // console.log("property " + name);
+        properties[name] = {
+          types: [{ type: "UNKNOWN_TYPE" }],
+          selection: "anyOf",
+          name,
+          id: name,
+        };
       }
-      properties[name] = { ...property, name, id: name };
     });
   }
   return {
@@ -404,10 +458,12 @@ fs.writeFileSync(
 );
 const baseSource = project.createSourceFile("sorucesss.ts", "console.log()");
 
-const base:string[] = [];
+const base: string[] = [];
 baseSource
   .getChildren()
-  .forEach((c) => c.getSymbolsInScope(-1).forEach((m) => base.push(m.getName())));
+  .forEach((c) =>
+    c.getSymbolsInScope(-1).forEach((m) => base.push(m.getName()))
+  );
 source.getChildren().forEach((c) => {
   c.getSymbolsInScope(-1).forEach((s) => {
     if (!base.includes(s.getName())) {
