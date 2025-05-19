@@ -14,23 +14,15 @@ import { BreezeSchema } from "./BREEZE_SchemaTyping";
 import * as path from "path";
 // import ts from "typescript";
 
-
-
-
-function extractFinalQualifiedName(str:string) {
-  str = str.replace(/^"|"$/g, "");
-
-  const quoteSplit = str.split('"');
-  const afterPath = quoteSplit.length > 1 ? quoteSplit[quoteSplit.length - 1]||"" : str;
-
-  return afterPath.startsWith('.') ? afterPath.slice(1) : afterPath;
+export type Globals =  {
+  variables: Record<string, BreezeSchema.Type>;
+  functions: Record<string, BreezeSchema.FunctionType>;
+  classes: Record<string, BreezeSchema.Type>;
 }
 
-
-
-
+const FilePrefix = "LIB_DOM."
 const project = new Project();
-const conf: Record<string, BreezeSchema.StoredSchema> = {};
+const conf: Record<string, BreezeSchema.StoredSchema> & {globals?:Globals} = {};
 const sourceFilePath = process.argv[2];
 let outputFile = process.argv[3];
 
@@ -48,6 +40,82 @@ if (!outputFile) {
   outputFile = path.join(inputDir, `${fileName}.json`);
 }
 source.meta = "Helllo there";
+
+
+
+
+
+source.getModules().forEach((m) => processModule(m,FilePrefix));
+source.getInterfaces().forEach((i) => processInterface(i,FilePrefix));
+source.getTypeAliases().forEach((t) => processTypeAlias(t,FilePrefix));
+
+
+const globals = processGlobalDeclarations(source)
+
+conf["globals"] = globals
+
+
+console.log(outputFile);
+fs.writeFileSync(
+  outputFile,
+  JSON.stringify(conf, (_, s) => (s === undefined ? null : s), 2)
+);
+
+
+
+function processGlobalDeclarations(source: SourceFile):Globals {
+  const globals = {
+    variables: {} as Record<string, BreezeSchema.Type>,
+    functions: {} as Record<string, BreezeSchema.FunctionType>,
+    classes: {} as Record<string, BreezeSchema.Type>
+  };
+
+  source.getStatements().forEach((stmt) => {
+    if (Node.isVariableStatement(stmt) && stmt.hasDeclareKeyword()) {
+      stmt.getDeclarations().forEach((decl) => {
+        const name = decl.getName();
+        const varType = decl.getType();
+        globals.variables[name] = checkAndConverToUnion(processType(varType));
+      });
+    }
+    else if (Node.isFunctionDeclaration(stmt) && stmt.hasDeclareKeyword()) {
+      const name = stmt.getName();
+      if (name) {
+        const funcType = stmt.getType();
+        globals.functions[name] = processFunction(funcType);
+      }
+    }
+
+    else if (Node.isClassDeclaration(stmt) && stmt.hasDeclareKeyword()) {
+      const name = stmt.getName();
+      if (name) {
+        const classType = stmt.getType();
+        globals.classes[name] = checkAndConverToUnion(processType(classType));
+      }
+    }
+
+    
+
+  });
+
+  return globals;
+}
+
+
+
+function extractFinalQualifiedName(str:string) {
+  str = str.replace(/^"|"$/g, "");
+
+  const quoteSplit = str.split('"');
+  const afterPath = quoteSplit.length > 1 ? quoteSplit[quoteSplit.length - 1]||"" : str;
+
+  return FilePrefix+ (afterPath.startsWith('.') ? afterPath.slice(1) : afterPath);
+}
+
+
+
+
+
 function processInterface(
   i: InterfaceDeclaration,
   idPrefix: "" | `${string}.` = ""
@@ -55,11 +123,10 @@ function processInterface(
   const name = i.getName();
   const id = idPrefix + name;
   const objectDetails = processObject(i.getType());
-  const templateInputs: BreezeSchema.SchemaModals["templateInputs"] = [];
+  const templateInputs: BreezeSchema.SchemaModals["templates"] = [];
   i.getTypeParameters().forEach((template) => {
     const symbol = template.getSymbol();
     const name = symbol?.getName() || "Unknown";
-    console.log(name);
     const constraints = template.getType().getConstraint();
     templateInputs.push({
       ...(constraints && { extends: processType(constraints) }),
@@ -152,9 +219,6 @@ function processTypeAlias(
   conf[id] = combinedType;
 }
 
-source.getModules().forEach((m) => processModule(m));
-source.getInterfaces().forEach((i) => processInterface(i));
-source.getTypeAliases().forEach((t) => processTypeAlias(t));
 
 function processType(
   type: Type,
@@ -186,12 +250,12 @@ function processType(
 
   //KEEP IT AT THE END
   else if (type.isObject() && !type.isArray()) {
-    const name = type.getSymbol()?.getName();
+    const name = type.getSymbol()?.getFullyQualifiedName();
     if (name && name != "__type") {
       // const typeName = symbol.getName();
       const typeArguments = type.getTypeArguments(); // Get the template inputs
       return {
-        $ref: name,
+        $ref: extractFinalQualifiedName(name),
         templateInputs: typeArguments.map((t) => {
           const type = processType(t); // Process the template inputs
           return type;
@@ -211,8 +275,10 @@ function processType(
     };
   } else if (type.getAliasSymbol()) {
     const typeArguments = type.getTypeArguments();
+    const name = type.getAliasSymbol()?.getFullyQualifiedName();
+    const ref = name? extractFinalQualifiedName(name) : "UNKNOWN_TYPE";
     return {
-      $ref: type.getAliasSymbol()?.getName(),
+      $ref: ref,
       templateInputs: typeArguments.map((t) => processType(t)),
     };
   } else {
@@ -272,10 +338,10 @@ function checkBaseTypes(
       types: type.getUnionTypes().map((t) => processType(t)),
     };
   } else if (type.isIntersection()) {
-    const alias = type.getAliasSymbol()?.getName();
+    const alias = type.getAliasSymbol()?.getFullyQualifiedName();
     if (alias && !bypassRef) {
       return {
-        $ref: alias,
+        $ref: extractFinalQualifiedName(alias),
       };
     }
     return {
@@ -359,7 +425,6 @@ function processObject(obj: Type): BreezeSchema.ObjectType {
       (prop) => {
         const propType = prop.getType();
         const name = prop.getName();
-        // console.log(name);
         if (!["tee", "view"].includes(name)) {
           const property = checkAndConverToUnion(processType(propType));
           if (prop.getSymbol()?.isOptional() === false) {
@@ -368,7 +433,6 @@ function processObject(obj: Type): BreezeSchema.ObjectType {
 
           properties[name] = { ...property, name, id: name };
         } else {
-          // console.log("property " + name);
           properties[name] = {
             types: [{ type: "UNKNOWN_TYPE" }],
             selection: "anyOf",
@@ -385,7 +449,6 @@ function processObject(obj: Type): BreezeSchema.ObjectType {
         console.log(prop.getName(), obj.getText());
         throw Error("Object declaration not found");
       }
-      // console.log(prop.getName());
       const name = prop.getName();
 
       if (!["tee"].includes(name)) {
@@ -396,7 +459,6 @@ function processObject(obj: Type): BreezeSchema.ObjectType {
         }
         properties[name] = { ...property, name, id: name };
       } else {
-        // console.log("property " + name);
         properties[name] = {
           types: [{ type: "UNKNOWN_TYPE" }],
           selection: "anyOf",
@@ -451,23 +513,19 @@ function processFunction(func: Type): BreezeSchema.FunctionType {
     isAsync: false,
   };
 }
-console.log(outputFile);
-fs.writeFileSync(
-  outputFile,
-  JSON.stringify(conf, (_, s) => (s === undefined ? null : s), 2)
-);
-const baseSource = project.createSourceFile("sorucesss.ts", "console.log()");
 
-const base: string[] = [];
-baseSource
-  .getChildren()
-  .forEach((c) =>
-    c.getSymbolsInScope(-1).forEach((m) => base.push(m.getName()))
-  );
-source.getChildren().forEach((c) => {
-  c.getSymbolsInScope(-1).forEach((s) => {
-    if (!base.includes(s.getName())) {
-      console.log(s.getEscapedName());
-    }
-  });
-});
+// const baseSource = project.createSourceFile("sorucesss.ts", "console.log()");
+
+// const base: string[] = [];
+// baseSource
+//   .getChildren()
+//   .forEach((c) =>
+//     c.getSymbolsInScope(-1).forEach((m) => base.push(m.getName()))
+//   );
+// source.getChildren().forEach((c) => {
+//   c.getSymbolsInScope(-1).forEach((s) => {
+//     if (!base.includes(s.getName())) {
+//       console.log(s.getEscapedName());
+//     }
+//   });
+// });

@@ -128,7 +128,7 @@ type CustomFunctionCall = BaseFunctionCall & { $ref: string };
 
 interface Custom extends BaseValue, BaseStatement {
   type: "CUSTOM";
-  body: string;
+  value: string;
 }
 
 interface IfBlock extends BaseStatement {

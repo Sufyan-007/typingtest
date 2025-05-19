@@ -64,13 +64,11 @@ export namespace BreezeSchema {
     type: "OBJECT";
     id?: string;
     properties: Record<Properties["id"], Properties>;
-    templateInputs?: Array<{
-      name: string;
-      extends?: Type | BaseType | ReferencedType;
-    }>;
     required?: Properties["id"][];
     additionalProperties?: Type;
   }
+
+  
 
   export interface StoredSchema {
     name: string;
@@ -84,6 +82,10 @@ export namespace BreezeSchema {
     id:string
     extends?: Array<ReferencedType>;
     schemaType: "modals";
+    templates?: Array<{
+      name: string;
+      extends?: Type | BaseType | ReferencedType;
+    }>;
   }
 
   export interface CombinedType extends Type, StoredSchema {

@@ -23,7 +23,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var ts_morph_1 = require("ts-morph");
 var fs = require("fs");
 var path = require("path");
-// import ts from "typescript";
+var FilePrefix = "Lib.";
 var project = new ts_morph_1.Project();
 var conf = {};
 var sourceFilePath = process.argv[2];
@@ -40,6 +40,50 @@ if (!outputFile) {
     outputFile = path.join(inputDir, "".concat(fileName, ".json"));
 }
 source.meta = "Helllo there";
+source.getModules().forEach(function (m) { return processModule(m); });
+source.getInterfaces().forEach(function (i) { return processInterface(i); });
+source.getTypeAliases().forEach(function (t) { return processTypeAlias(t, FilePrefix); });
+var globals = processGlobalDeclarations(source);
+conf["globals"] = globals;
+console.log(outputFile);
+fs.writeFileSync(outputFile, JSON.stringify(conf, function (_, s) { return (s === undefined ? null : s); }, 2));
+function processGlobalDeclarations(source) {
+    var globals = {
+        variables: {},
+        functions: {},
+        classes: {}
+    };
+    source.getStatements().forEach(function (stmt) {
+        if (ts_morph_1.Node.isVariableStatement(stmt) && stmt.hasDeclareKeyword()) {
+            stmt.getDeclarations().forEach(function (decl) {
+                var name = decl.getName();
+                var varType = decl.getType();
+                globals.variables[name] = checkAndConverToUnion(processType(varType));
+            });
+        }
+        else if (ts_morph_1.Node.isFunctionDeclaration(stmt) && stmt.hasDeclareKeyword()) {
+            var name_1 = stmt.getName();
+            if (name_1) {
+                var funcType = stmt.getType();
+                globals.functions[name_1] = processFunction(funcType);
+            }
+        }
+        else if (ts_morph_1.Node.isClassDeclaration(stmt) && stmt.hasDeclareKeyword()) {
+            var name_2 = stmt.getName();
+            if (name_2) {
+                var classType = stmt.getType();
+                globals.classes[name_2] = checkAndConverToUnion(processType(classType));
+            }
+        }
+    });
+    return globals;
+}
+function extractFinalQualifiedName(str) {
+    str = str.replace(/^"|"$/g, "");
+    var quoteSplit = str.split('"');
+    var afterPath = quoteSplit.length > 1 ? quoteSplit[quoteSplit.length - 1] || "" : str;
+    return FilePrefix + (afterPath.startsWith('.') ? afterPath.slice(1) : afterPath);
+}
 function processInterface(i, idPrefix) {
     var _a;
     if (idPrefix === void 0) { idPrefix = ""; }
@@ -86,14 +130,24 @@ function processModule(module, idPrefix) {
 function processTypeAlias(t, idPrefix) {
     if (idPrefix === void 0) { idPrefix = ""; }
     var name = t.getName();
+    var type;
     var id = idPrefix + name;
-    var type = checkAndConverToUnion(processType(t.getType(), true));
+    if (!["HeadersInit"].includes(name)) {
+        type = checkAndConverToUnion(processType(t.getType(), true));
+    }
+    else {
+        type = {
+            selection: "anyOf",
+            types: [
+                {
+                    type: "UNKNOWN_TYPE",
+                },
+            ],
+        };
+    }
     var combinedType = __assign(__assign({ schemaType: "combined_schema", name: name }, type), { id: id });
     conf[id] = combinedType;
 }
-// source.getModules().forEach((m) => processModule(m));
-// source.getInterfaces().forEach((i) => processInterface(i));
-// source.getTypeAliases().forEach((t) => processTypeAlias(t));
 function processType(type, bypassRef) {
     var _a, _b;
     if (bypassRef === void 0) { bypassRef = false; }
@@ -119,12 +173,12 @@ function processType(type, bypassRef) {
     }
     //KEEP IT AT THE END
     else if (type.isObject() && !type.isArray()) {
-        var name_1 = (_a = type.getSymbol()) === null || _a === void 0 ? void 0 : _a.getName();
-        if (name_1 && name_1 != "__type") {
+        var name_3 = (_a = type.getSymbol()) === null || _a === void 0 ? void 0 : _a.getName();
+        if (name_3 && name_3 != "__type") {
             // const typeName = symbol.getName();
             var typeArguments = type.getTypeArguments(); // Get the template inputs
             return {
-                $ref: name_1,
+                $ref: name_3,
                 templateInputs: typeArguments.map(function (t) {
                     var type = processType(t); // Process the template inputs
                     return type;
@@ -189,7 +243,7 @@ function checkBaseTypes(type, bypassRef) {
         };
     }
     else if (type.isUnion()) {
-        var alias = (_a = type.getAliasSymbol()) === null || _a === void 0 ? void 0 : _a.getName();
+        var alias = extractFinalQualifiedName(((_a = type.getAliasSymbol()) === null || _a === void 0 ? void 0 : _a.getFullyQualifiedName()) || "");
         if (alias && !bypassRef) {
             return {
                 $ref: alias,
@@ -289,27 +343,48 @@ function processObject(obj) {
         __spreadArray(__spreadArray([], declaration.getProperties(), true), declaration.getMethods(), true).forEach(function (prop) {
             var _a;
             var propType = prop.getType();
-            var property = checkAndConverToUnion(processType(propType));
             var name = prop.getName();
-            if (((_a = prop.getSymbol()) === null || _a === void 0 ? void 0 : _a.isOptional()) === false) {
-                required.push(name);
+            if (!["tee", "view"].includes(name)) {
+                var property = checkAndConverToUnion(processType(propType));
+                if (((_a = prop.getSymbol()) === null || _a === void 0 ? void 0 : _a.isOptional()) === false) {
+                    required.push(name);
+                }
+                properties[name] = __assign(__assign({}, property), { name: name, id: name });
             }
-            properties[name] = __assign(__assign({}, property), { name: name, id: name });
+            else {
+                properties[name] = {
+                    types: [{ type: "UNKNOWN_TYPE" }],
+                    selection: "anyOf",
+                    name: name,
+                    id: name,
+                };
+            }
         });
     }
     else {
         obj.getProperties().forEach(function (prop) {
             var declaration = prop.getDeclarations()[0];
             if (!declaration) {
+                console.log(prop.getName(), obj.getText());
                 throw Error("Object declaration not found");
             }
-            var propType = prop.getTypeAtLocation(declaration);
-            var property = checkAndConverToUnion(processType(propType));
             var name = prop.getName();
-            if (!prop.isOptional()) {
-                required.push(name);
+            if (!["tee"].includes(name)) {
+                var propType = prop.getTypeAtLocation(declaration);
+                var property = checkAndConverToUnion(processType(propType));
+                if (!prop.isOptional()) {
+                    required.push(name);
+                }
+                properties[name] = __assign(__assign({}, property), { name: name, id: name });
             }
-            properties[name] = __assign(__assign({}, property), { name: name, id: name });
+            else {
+                properties[name] = {
+                    types: [{ type: "UNKNOWN_TYPE" }],
+                    selection: "anyOf",
+                    name: name,
+                    id: name,
+                };
+            }
         });
     }
     return {
@@ -346,17 +421,17 @@ function processFunction(func) {
         isAsync: false,
     };
 }
-console.log(outputFile);
-fs.writeFileSync(outputFile, JSON.stringify(conf, function (_, s) { return (s === undefined ? null : s); }, 2));
-var baseSource = project.createSourceFile("sorucesss.ts", "console.log()");
-var base = [];
-baseSource
-    .getChildren()
-    .forEach(function (c) { return c.getSymbolsInScope(-1).forEach(function (m) { return base.push(m.getName()); }); });
-source.getChildren().forEach(function (c) {
-    c.getSymbolsInScope(-1).forEach(function (s) {
-        if (!base.includes(s.getName())) {
-            console.log(s.getEscapedName());
-        }
-    });
-});
+// const baseSource = project.createSourceFile("sorucesss.ts", "console.log()");
+// const base: string[] = [];
+// baseSource
+//   .getChildren()
+//   .forEach((c) =>
+//     c.getSymbolsInScope(-1).forEach((m) => base.push(m.getName()))
+//   );
+// source.getChildren().forEach((c) => {
+//   c.getSymbolsInScope(-1).forEach((s) => {
+//     if (!base.includes(s.getName())) {
+//       console.log(s.getEscapedName());
+//     }
+//   });
+// });
