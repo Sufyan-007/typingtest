@@ -1,24 +1,24 @@
-{
-    "compilerOptions": {
-      "strict": true,
-      "noUncheckedIndexedAccess": true,
-      "noImplicitOverride": true,
-      "noPropertyAccessFromIndexSignature": true,
-      "exactOptionalPropertyTypes": true,
-      "noImplicitAny": true,
-      "strictNullChecks": true,
-      "strictFunctionTypes": true,
-      "strictBindCallApply": true,
-      "strictPropertyInitialization": true,
-      "useUnknownInCatchVariables": true,
-      "alwaysStrict": true,
-      "noImplicitThis": true,
-      "forceConsistentCasingInFileNames": true,
-      "noUnusedLocals": true,
-      "noUnusedParameters": true,
-      "noImplicitReturns": true,
-      "noFallthroughCasesInSwitch": true
-    },
-    "exclude": ["Libs/**"]
-  }
-  
+  {
+      "compilerOptions": {
+        "strict": true,
+        "noUncheckedIndexedAccess": true,
+        "noImplicitOverride": true,
+        "noPropertyAccessFromIndexSignature": true,
+        "exactOptionalPropertyTypes": true,
+        "noImplicitAny": true,
+        "strictNullChecks": true,
+        "strictFunctionTypes": true,
+        "strictBindCallApply": true,
+        "strictPropertyInitialization": true,
+        "useUnknownInCatchVariables": true,
+        "alwaysStrict": true,
+        "noImplicitThis": true,
+        "forceConsistentCasingInFileNames": true,
+        "noUnusedLocals": true,
+        "noUnusedParameters": true,
+        "noImplicitReturns": true,
+        "noFallthroughCasesInSwitch": true
+      },
+      "exclude": ["Libs/**"]
+    }
+    
